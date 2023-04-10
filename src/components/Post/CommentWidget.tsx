@@ -1,7 +1,8 @@
 import React, { createRef, FunctionComponent, useEffect } from 'react'
+import styled from '@emotion/styled'
 
 const src = 'https://utteranc.es/client.js'
-const repo = 'minseok0123/minseok0123.github.io' // 자신 계정의 레포지토리로 설정
+const repo = 'ji5485/Goorm-Gatsby-Blog-Tutorial'
 
 type UtterancesAttributesType = {
   src: string
@@ -12,6 +13,12 @@ type UtterancesAttributesType = {
   crossorigin: string
   async: string
 }
+
+const UtterancesWrapper = styled.div`
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+`
 
 const CommentWidget: FunctionComponent = function () {
   const element = createRef<HTMLDivElement>()
@@ -38,7 +45,7 @@ const CommentWidget: FunctionComponent = function () {
     element.current.appendChild(utterances)
   }, [])
 
-  return <div ref={element} />
+  return <UtterancesWrapper ref={element} />
 }
 
 export default CommentWidget

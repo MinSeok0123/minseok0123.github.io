@@ -50,11 +50,11 @@ const Template: FunctionComponent<TemplateProps> = function ({
 
         <meta
           name="google-site-verification"
-          content="q8dEdeTPISgVk9rzhD1C6HV22mZnWYDy5OaB0Mt9yzg"
+          content="웹 마스터 도구가 제공하는 Meta 태그"
         />
         <meta
           name="naver-site-verification"
-          content="7df43528663d4b9cd62e972a7d16bdf99ae2622a"
+          content="웹 마스터 도구가 제공하는 Meta 태그"
         />
 
         <html lang="ko" />
