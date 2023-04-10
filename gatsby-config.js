@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `minlog`,
-    description: `개발 블로그 minlog 입니다.`,
-    author: `MinSeok`,
-    siteUrl: 'https://minlog.github.io/',
+    description: `개발 블로그입니다.`,
+    author: `Minseok`,
+    siteUrl: 'https://minseok0123.github.io/',
   },
   plugins: [
     {
@@ -84,7 +84,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://minlog.github.io/',
+        siteUrl: 'https://minseok0123.github.io/',
         stripQueryString: true,
       },
     },
@@ -92,6 +92,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
+        host: 'https://minseok.github.io',
+        sitemap: 'https://minseok.github.io/sitemap.xml',
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
