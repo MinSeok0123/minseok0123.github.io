@@ -3,7 +3,7 @@ module.exports = {
     title: `minlog`,
     description: `개발 블로그 minlog 입니다.`,
     author: `MinSeok`,
-    siteUrl: 'https://hd152534.github.io/',
+    siteUrl: 'https://minlog.github.io/',
   },
   plugins: [
     {
@@ -84,7 +84,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://hd152534.github.io/',
+        siteUrl: 'https://minlog.github.io/',
         stripQueryString: true,
       },
     },
