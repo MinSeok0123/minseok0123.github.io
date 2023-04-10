@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://minlog.github.io/sitemap-index.xml
-Host: https://minlog.github.io
+Sitemap: https://minseok0123.github.io/sitemap-index.xml
+Host: https://minseok0123.github.io
