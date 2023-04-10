@@ -93,7 +93,6 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: 'https://minseok.github.io',
-        sitemap: 'https://minseok.github.io/sitemap.xml',
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
