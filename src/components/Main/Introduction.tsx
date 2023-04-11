@@ -38,7 +38,7 @@ const Header = styled.div`
 const Logo = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap');
   font-family: 'Fira Mono', monospace;
-  font-weight: 550;
+  font-weight: 450;
   font-size: 1.5rem;
 `
 
