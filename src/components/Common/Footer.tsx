@@ -15,11 +15,21 @@ const FooterWrapper = styled.footer`
   }
 `
 
+const Acolor = styled.a`
+  color: #3a95ff;
+`
+
 const Footer: FunctionComponent = function () {
   return (
     <FooterWrapper>
-      Thank You for Visiting My Blog, Have a Good Day 😆
-      <br />© 2021 Developer MinSeok, Powered By Gatsby.
+      <span>
+        © 2023&nbsp;
+        <Acolor href="https://github.com/MinSeok0123">Minseok</Acolor>
+        &nbsp;powered by&nbsp;
+        <Acolor href="https://github.com/MinSeok0123/minseok0123.github.io">
+          minlog
+        </Acolor>
+      </span>
     </FooterWrapper>
   )
 }
