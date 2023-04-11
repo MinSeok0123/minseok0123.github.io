@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 type IntroductionProps = {
   profileImage: IGatsbyImageData
@@ -35,7 +37,7 @@ const Header = styled.div`
   }
 `
 
-const Logo = styled.div`
+const Logo = styled.a`
   @import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap');
   font-family: 'Fira Mono', monospace;
   font-weight: 450;
@@ -50,6 +52,7 @@ const Nav = styled.div`
   gap: 15px;
   @media (max-width: 1056px) {
     max-width: 153px;
+    gap: 2px;
   }
 `
 const Dark = styled.div`
@@ -66,6 +69,11 @@ const Dark = styled.div`
     background-color: #dee2e6;
     transition: all 0.125s ease-in 0s;
   }
+
+  @media (max-width: 1056px) {
+    width: 2.8rem;
+    height: 2rem;
+  }
 `
 
 const Search = styled.div`
@@ -81,6 +89,10 @@ const Search = styled.div`
   :hover {
     background-color: #dee2e6;
     transition: all 0.125s ease-in 0s;
+  }
+  @media (max-width: 1056px) {
+    width: 2.8rem;
+    height: 2rem;
   }
 `
 
@@ -103,17 +115,31 @@ const About = styled.button`
 `
 
 const Introduction: FunctionComponent<IntroductionProps> = function ({}) {
+  const notify = () => toast('준비중입니다.')
+
   return (
     <HeaderCon>
+      <ToastContainer
+        position="top-right" // 알람 위치 지정
+        autoClose={2000} // 자동 off 시간
+        hideProgressBar={false} // 진행시간바 숨김
+        closeOnClick // 클릭으로 알람 닫기
+        rtl={false} // 알림 좌우 반전
+        pauseOnFocusLoss // 화면을 벗어나면 알람 정지
+        draggable // 드래그 가능
+        pauseOnHover // 마우스를 올리면 알람 정지
+        theme="light"
+        // limit={1} // 알람 개수 제한
+      />
       <Header>
-        <Logo>minlog</Logo>
+        <Logo href="/">minlog</Logo>
         <Nav>
           <Dark>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M4.069 13h-4.069v-2h4.069c-.041.328-.069.661-.069 1s.028.672.069 1zm3.034-7.312l-2.881-2.881-1.414 1.414 2.881 2.881c.411-.529.885-1.003 1.414-1.414zm11.209 1.414l2.881-2.881-1.414-1.414-2.881 2.881c.528.411 1.002.886 1.414 1.414zm-6.312-3.102c.339 0 .672.028 1 .069v-4.069h-2v4.069c.328-.041.661-.069 1-.069zm0 16c-.339 0-.672-.028-1-.069v4.069h2v-4.069c-.328.041-.661.069-1 .069zm7.931-9c.041.328.069.661.069 1s-.028.672-.069 1h4.069v-2h-4.069zm-3.033 7.312l2.88 2.88 1.415-1.414-2.88-2.88c-.412.528-.886 1.002-1.415 1.414zm-11.21-1.415l-2.88 2.88 1.414 1.414 2.88-2.88c-.528-.411-1.003-.885-1.414-1.414zm6.312-10.897c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"></path>
             </svg>
           </Dark>
-          <Search>
+          <Search onClick={notify}>
             <svg width="17" height="17" viewBox="0 0 17 17">
               <path
                 fill-rule="evenodd"

@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { Global, css } from '@emotion/react'
 
+
+
 const defaultStyle = css`
   @import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2');
 
@@ -23,6 +25,8 @@ const defaultStyle = css`
     text-decoration: none;
     cursor: pointer;
   }
+
+  
 `
 
 const GlobalStyle: FunctionComponent = function () {

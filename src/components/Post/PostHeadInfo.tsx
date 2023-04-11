@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
+
 export type PostHeadInfoProps = {
   title: string
   date: string
