@@ -48,6 +48,9 @@ const Nav = styled.div`
   align-items: center;
   height: 100%;
   gap: 15px;
+  @media (max-width: 1056px) {
+    max-width: 153px;
+  }
 `
 const Dark = styled.div`
   display: flex;
