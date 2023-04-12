@@ -34,6 +34,8 @@ const PostItemContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
+  background-color: var(--element);
+  border-radius: 5px;
 `
 
 const Title = styled.div`

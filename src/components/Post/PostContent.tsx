@@ -60,7 +60,7 @@ const MarkdownRenderer = styled.div`
   blockquote {
     margin: 30px 0;
     padding: 5px 15px;
-    border-left: 2px solid #000000;
+    border-left: 2px solid var(--hr);
     font-weight: 800;
   }
 
@@ -73,7 +73,7 @@ const MarkdownRenderer = styled.div`
 
   // Adjust Horizontal Rule style
   hr {
-    border: 1px solid #000000;
+    border: 1px solid var(--hr);
     margin: 100px 0;
   }
 

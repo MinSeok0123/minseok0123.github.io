@@ -27,7 +27,7 @@ module.exports = {
         icon: `src/images/M.png`,
       },
     },
-
+    `@skagami/gatsby-plugin-dark-mode`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
 
