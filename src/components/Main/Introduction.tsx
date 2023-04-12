@@ -150,14 +150,14 @@ const Introduction: FunctionComponent<IntroductionProps> = function ({}) {
           <Dark
             onClick={() => {
               toggleTheme(theme === 'light' ? 'dark' : 'light')
-              toggleDarkMode(!isDarkMode) // checked 인자 전달
+              toggleDarkMode(!isDarkMode)
             }}
             role="checkbox"
             aria-checked={theme === 'dark'}
             tabIndex={0}
           >
             <DarkModeSwitch
-              checked={isDarkMode}
+              checked={theme === 'dark'}
               onChange={toggleDarkMode}
               size={25}
             />
