@@ -10,14 +10,14 @@ const PostItemWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;
   transition: 0.3s box-shadow;
   transform: translateY(0);
   transition: transform 0.3s ease-out;
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 16px 0px;
     transform: translateY(-7px);
     transition-delay: 0s;
   }

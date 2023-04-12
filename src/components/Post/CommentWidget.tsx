@@ -18,9 +18,14 @@ const UtterancesWrapper = styled.div`
   @media (max-width: 768px) {
     padding: 0 20px;
   }
+
+  ${({ theme }) =>
+    theme === 'dark' &&
+    `
+  `}
 `
 
-const CommentWidget: FunctionComponent = function () {
+const CommentWidget: FunctionComponent<{ id: string }> = function ({ id }) {
   const element = createRef<HTMLDivElement>()
 
   useEffect(() => {
@@ -33,7 +38,7 @@ const CommentWidget: FunctionComponent = function () {
       repo,
       'issue-term': 'pathname',
       label: 'Comment',
-      theme: `github-light`,
+      theme: `github-${localStorage.getItem('theme') || 'light'}`,
       crossorigin: 'anonymous',
       async: 'true',
     }
@@ -45,7 +50,13 @@ const CommentWidget: FunctionComponent = function () {
     element.current.appendChild(utterances)
   }, [])
 
-  return <UtterancesWrapper ref={element} />
+  return (
+    <UtterancesWrapper
+      ref={element}
+      id={id}
+      theme={localStorage.getItem('theme') || 'light'}
+    />
+  )
 }
 
 export default CommentWidget

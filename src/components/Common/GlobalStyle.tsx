@@ -46,7 +46,8 @@ const defaultStyle = css`
     --textLink: yellow;
     --hr: hsla(0, 0%, 100%, 0.2);
     --element: #1e1e1e;
-    --darkhover: #4D4D4D;
+    --darkhover: #4d4d4d;
+    --postback: #121212;
 
     transition: background-color 0.5s ease;
 
