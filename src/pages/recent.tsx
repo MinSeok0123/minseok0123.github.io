@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react'
+import React, { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import { graphql } from 'gatsby'
 import queryString, { ParsedQuery } from 'query-string'
 import { PostListItemType } from 'types/PostItem.types'
@@ -76,6 +76,14 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       ),
     [],
   )
+  const [category, setCategory] = useState(
+    localStorage.getItem('category') || 'close',
+  )
+
+  // category 상태값이 변경되면 로컬 스토리지에 저장
+  useEffect(() => {
+    localStorage.setItem('category', category)
+  }, [category])
 
   return (
     <Template
@@ -85,11 +93,14 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       image={publicURL}
     >
       <Introduction profileImage={gatsbyImageData} />
-      {/* <CategoryList
-        selectedCategory={selectedCategory}
-        categoryList={categoryList}
-      /> */}
       <ToggleNav></ToggleNav>
+
+      {category === 'open' && (
+        <CategoryList
+          selectedCategory={selectedCategory}
+          categoryList={categoryList}
+        />
+      )}
       <PostList selectedCategory={selectedCategory} posts={edges} />
     </Template>
   )

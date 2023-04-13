@@ -21,10 +21,10 @@ export type CategoryListProps = {
 
 const CategoryListWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
-  width: 192px;
-  margin: 100px auto 0;
+  width: 800px;
+  margin-top: 20px !important;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -65,9 +65,6 @@ const CategoryList: FunctionComponent<CategoryListProps> = function ({
   selectedCategory,
   categoryList,
 }) {
-  if (!categoryList) {
-    return null
-  }
   return (
     <CategoryListWrapper>
       {Object.entries(categoryList).map(([name, count]) => (

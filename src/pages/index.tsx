@@ -85,10 +85,10 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       image={publicURL}
     >
       <Introduction profileImage={gatsbyImageData} />
-      {/* <CategoryList
+      <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
-      /> */}
+      />
       <ToggleNav />
       <PostList selectedCategory={selectedCategory} posts={edges} />
     </Template>

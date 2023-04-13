@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
+import CategoryList from './CategoryList'
 
 const ToNav = styled.div`
   margin-top: 1.5rem !important;
@@ -99,21 +100,23 @@ export default function ToggleNav() {
   }
 
   useEffect(() => {
-    const savedTab =
-      typeof window !== 'undefined' ? localStorage.getItem('tense') : null
-    if (savedTab === '트렌딩' || savedTab === '최신') {
-      setActiveTab(savedTab)
+    if (typeof window !== 'undefined') {
+      const savedTab = localStorage.getItem('tense')
+      if (savedTab === '트렌딩' || savedTab === '최신') {
+        setActiveTab(savedTab)
+      }
+      if (localStorage.getItem('category')) {
+        localStorage.setItem('category', 'close')
+      }
     }
   }, [])
 
   function handleCategoryClick() {
-    const currentStatus = localStorage.getItem('category')
-    const newStatus = currentStatus === 'open' ? 'close' : 'open'
-    localStorage.setItem('category', newStatus)
-  }
-
-  if (localStorage.getItem('category')) {
-    localStorage.setItem('category', 'close')
+    if (typeof window !== 'undefined') {
+      const currentStatus = localStorage.getItem('category')
+      const newStatus = currentStatus === 'open' ? 'close' : 'open'
+      localStorage.setItem('category', newStatus)
+    }
   }
 
   return (
