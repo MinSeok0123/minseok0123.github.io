@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const ToNav = styled.div`
   margin-top: 1.5rem !important;
@@ -63,61 +63,83 @@ const Menu = styled.div`
 `
 
 export default function ToggleNav() {
-  const [activeTab, setActiveTab] = useState<string>(
-    typeof window !== 'undefined'
-      ? localStorage.getItem('tense') || '트렌딩'
-      : '트렌딩',
-  )
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    const savedTab =
+      typeof window !== 'undefined' ? localStorage.getItem('tense') : null
+    if (savedTab === '트렌딩' || savedTab === '최신') {
+      return savedTab
+    }
+    return '트렌딩'
+  })
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName)
     if (typeof window !== 'undefined') {
-      localStorage.setItem('tense', tabName === '트렌딩' ? 'trand' : 'recent')
+      localStorage.setItem('tense', tabName === '트렌딩' ? '트렌딩' : '최신')
     }
   }
+
+  useEffect(() => {
+    const savedTab =
+      typeof window !== 'undefined' ? localStorage.getItem('tense') : null
+    if (savedTab === '트렌딩' || savedTab === '최신') {
+      setActiveTab(savedTab)
+    }
+  }, [])
 
   return (
     <ToNav>
       <TogNav>
-        <NavItem
-          className={activeTab === '트렌딩' ? 'active' : ''}
-          onClick={() => handleTabClick('트렌딩')}
-        >
-          <Icon>
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              stroke-width="0"
-              viewBox="0 0 24 24"
-              height="1em"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"></path>
-            </svg>
-          </Icon>
-          <span>트렌딩</span>
-        </NavItem>
-
-        <NavItem
-          className={activeTab === '최신' ? 'active' : ''}
-          onClick={() => handleTabClick('최신')}
-        >
-          <Icon>
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              stroke-width="0"
-              viewBox="0 0 24 24"
-              height="1em"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
-            </svg>
-          </Icon>
-          <span>최신</span>
-        </NavItem>
+        <a href="/">
+          <NavItem
+            className={activeTab === '트렌딩' ? 'active' : ''}
+            onClick={() => handleTabClick('트렌딩')}
+            style={{
+              color:
+                activeTab === '트렌딩' ? 'var( --tenseactiv)' : 'var( --tense)',
+            }}
+          >
+            <Icon>
+              <svg
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 24 24"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"></path>
+              </svg>
+            </Icon>
+            <span>트렌딩</span>
+          </NavItem>
+        </a>
+        <a href="/recent">
+          <NavItem
+            className={activeTab === '최신' ? 'active' : ''}
+            onClick={() => handleTabClick('최신')}
+            style={{
+              color:
+                activeTab === '최신' ? 'var( --tenseactiv)' : 'var( --tense)',
+            }}
+          >
+            <Icon>
+              <svg
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 24 24"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
+              </svg>
+            </Icon>
+            <span>최신</span>
+          </NavItem>
+        </a>
       </TogNav>
       <Menu>
         <svg

@@ -30,8 +30,10 @@ const defaultStyle = css`
     --textTitle: #222;
     --textLink: blue;
     --hr: hsla(0, 0%, 0%, 0.2);
-    --element2: white;
     --darkhover: #dee2e6;
+
+    --tenseactiv: #212529;
+    --tense: #868e96;
 
     background-color: var(--bg);
   }
@@ -47,6 +49,9 @@ const defaultStyle = css`
     --element: #1e1e1e;
     --darkhover: #4d4d4d;
     --postback: #121212;
+
+    --tenseactiv: #ececec;
+    --tense: #acacac;
 
     color: var(--textNormal);
   }
