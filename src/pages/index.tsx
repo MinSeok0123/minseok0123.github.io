@@ -52,30 +52,30 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       ? 'All'
       : parsed.category
 
-  // const categoryList = useMemo(
-  //   () =>
-  //     edges.reduce(
-  //       (
-  //         list: CategoryListProps['categoryList'],
-  //         {
-  //           node: {
-  //             frontmatter: { categories },
-  //           },
-  //         }: PostListItemType,
-  //       ) => {
-  //         categories.forEach(category => {
-  //           if (list[category] === undefined) list[category] = 1
-  //           else list[category]++
-  //         })
+  const categoryList = useMemo(
+    () =>
+      edges.reduce(
+        (
+          list: CategoryListProps['categoryList'],
+          {
+            node: {
+              frontmatter: { categories },
+            },
+          }: PostListItemType,
+        ) => {
+          categories.forEach(category => {
+            if (list[category] === undefined) list[category] = 1
+            else list[category]++
+          })
 
-  //         list['All']++
+          list['All']++
 
-  //         return list
-  //       },
-  //       { All: 0 },
-  //     ),
-  //   [],
-  // )
+          return list
+        },
+        { All: 0 },
+      ),
+    [],
+  )
 
   return (
     <Template
@@ -89,7 +89,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       /> */}
-      <ToggleNav></ToggleNav>
+      <ToggleNav />
       <PostList selectedCategory={selectedCategory} posts={edges} />
     </Template>
   )

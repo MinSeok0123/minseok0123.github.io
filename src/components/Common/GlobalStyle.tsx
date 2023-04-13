@@ -31,7 +31,7 @@ const defaultStyle = css`
     --textLink: blue;
     --hr: hsla(0, 0%, 0%, 0.2);
     --darkhover: #dee2e6;
-
+    --category: #495057;
     --tenseactiv: #212529;
     --tense: #868e96;
 
@@ -49,7 +49,7 @@ const defaultStyle = css`
     --element: #1e1e1e;
     --darkhover: #4d4d4d;
     --postback: #121212;
-
+    --category: #d9d9d9;
     --tenseactiv: #ececec;
     --tense: #acacac;
 

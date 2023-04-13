@@ -62,6 +62,25 @@ const Menu = styled.div`
   height: 24px;
 `
 
+const Category = styled.div`
+  background-color: var(--element);
+  color: var(--category);
+  height: 2rem;
+  width: 6rem;
+  border-radius: 4px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 4px;
+  cursor: pointer;
+`
+
 export default function ToggleNav() {
   const [activeTab, setActiveTab] = useState<string>(() => {
     const savedTab =
@@ -86,6 +105,16 @@ export default function ToggleNav() {
       setActiveTab(savedTab)
     }
   }, [])
+
+  function handleCategoryClick() {
+    const currentStatus = localStorage.getItem('category')
+    const newStatus = currentStatus === 'open' ? 'close' : 'open'
+    localStorage.setItem('category', newStatus)
+  }
+
+  if (localStorage.getItem('category')) {
+    localStorage.setItem('category', 'close')
+  }
 
   return (
     <ToNav>
@@ -140,6 +169,20 @@ export default function ToggleNav() {
             <span>최신</span>
           </NavItem>
         </a>
+        <Category onClick={handleCategoryClick}>
+          <span>카테고리</span>
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M7 10l5 5 5-5z"></path>
+          </svg>
+        </Category>
       </TogNav>
       <Menu>
         <svg
