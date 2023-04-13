@@ -7,6 +7,7 @@ import CategoryList, { CategoryListProps } from 'components/Main/CategoryList'
 import Introduction from 'components/Main/Introduction'
 import PostList from 'components/Main/PostList'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
+import ToggleNav from 'components/Main/ToggleNav'
 
 type IndexPageProps = {
   location: {
@@ -84,10 +85,11 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       image={publicURL}
     >
       <Introduction profileImage={gatsbyImageData} />
-      <CategoryList
+      {/* <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
-      />
+      /> */}
+      <ToggleNav></ToggleNav>
       <PostList selectedCategory={selectedCategory} posts={edges} />
     </Template>
   )

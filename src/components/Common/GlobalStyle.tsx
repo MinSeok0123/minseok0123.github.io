@@ -34,7 +34,6 @@ const defaultStyle = css`
     --darkhover: #dee2e6;
 
     background-color: var(--bg);
-    transition: background-color 0.5s ease;
   }
 
   body.dark {
@@ -48,8 +47,6 @@ const defaultStyle = css`
     --element: #1e1e1e;
     --darkhover: #4d4d4d;
     --postback: #121212;
-
-    transition: background-color 0.5s ease;
 
     color: var(--textNormal);
   }

@@ -38,7 +38,10 @@ const CommentWidget: FunctionComponent<{ id: string }> = function ({ id }) {
       repo,
       'issue-term': 'pathname',
       label: 'Comment',
-      theme: `github-${localStorage.getItem('theme') || 'light'}`,
+      theme: `github-${
+        (typeof window !== 'undefined' && localStorage.getItem('theme')) ||
+        'light'
+      }`,
       crossorigin: 'anonymous',
       async: 'true',
     }
@@ -54,7 +57,10 @@ const CommentWidget: FunctionComponent<{ id: string }> = function ({ id }) {
     <UtterancesWrapper
       ref={element}
       id={id}
-      theme={localStorage.getItem('theme') || 'light'}
+      theme={
+        (typeof window !== 'undefined' && localStorage.getItem('theme')) ||
+        'light'
+      }
     />
   )
 }

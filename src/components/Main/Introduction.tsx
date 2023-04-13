@@ -172,6 +172,7 @@ const Introduction: FunctionComponent<IntroductionProps> = function ({}) {
               ></path>
             </svg>
           </Search>
+
           <About>ABOUT</About>
         </Nav>
       </Header>
