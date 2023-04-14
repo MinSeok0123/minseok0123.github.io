@@ -34,6 +34,8 @@ const defaultStyle = css`
     --category: #495057;
     --tenseactiv: #212529;
     --tense: #868e96;
+    --velog: #12b886;
+    --catebg: #e9ecef;
 
     background-color: var(--bg);
   }
@@ -52,6 +54,7 @@ const defaultStyle = css`
     --category: #d9d9d9;
     --tenseactiv: #ececec;
     --tense: #acacac;
+    --catebg: #121212;
 
     color: var(--textNormal);
   }

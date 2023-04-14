@@ -21,16 +21,20 @@ export type CategoryListProps = {
 
 const CategoryListWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  width: 800px;
-  margin-top: 20px !important;
-  margin: 0 auto;
+  width: 192px;
+  position: absolute;
+  top: 45px;
+  left: -100px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px 0px;
 
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     width: 100%;
     margin-top: 50px;
     padding: 0 20px;
-  }
+  } */
 `
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -39,25 +43,26 @@ const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
 ))<CategoryItemProps>`
   display: flex;
   align-items: center;
-  margin-right: 15px;
   min-width: auto;
   height: 40px;
-  border-radius: 8px;
 
-  background-color: ${({ active }) =>
-    active ? 'rgba(13,12,34,.05)' : 'var(--element)'};
-  padding: 7px;
-  font-size: 18px;
+  background-color: var(--element);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
   font-weight: ${({ active }) => (active ? '600' : '400')};
-  color: ${({ active }) => (active ? '#0d0c22' : '#6e6d7a')};
+  color: ${({ active }) => (active ? 'var(--velog)' : '#6e6d7a')};
   cursor: pointer;
 
   &:last-of-type {
     margin-right: 0;
   }
 
-  @media (max-width: 768px) {
-    font-size: 15px;
+  // @media (max-width: 768px) {
+  //   font-size: 15px;
+  // }
+
+  &:hover {
+    background-color: var(--catebg);
   }
 `
 

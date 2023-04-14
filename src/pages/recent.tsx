@@ -8,6 +8,8 @@ import Introduction from 'components/Main/Introduction'
 import PostList from 'components/Main/PostList'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import ToggleNav from 'components/Main/ToggleNav'
+import { useRecoilState } from 'recoil'
+import { selectedCategoryState, categoryListState } from '../recoil/recoil'
 
 type IndexPageProps = {
   location: {
@@ -46,44 +48,46 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
     },
   },
 }) {
-  const parsed: ParsedQuery<string> = queryString.parse(search)
-  const selectedCategory: string =
-    typeof parsed.category !== 'string' || !parsed.category
-      ? 'All'
-      : parsed.category
-
-  const categoryList = useMemo(
-    () =>
-      edges.reduce(
-        (
-          list: CategoryListProps['categoryList'],
-          {
-            node: {
-              frontmatter: { categories },
-            },
-          }: PostListItemType,
-        ) => {
-          categories.forEach(category => {
-            if (list[category] === undefined) list[category] = 1
-            else list[category]++
-          })
-
-          list['All']++
-
-          return list
-        },
-        { All: 0 },
-      ),
-    [],
+  const [selectedCategory, setSelectedCategory] = useRecoilState(
+    selectedCategoryState,
   )
-  const [category, setCategory] = useState(
-    localStorage.getItem('category') || 'close',
-  )
+  const [categoryList, setCategoryList] = useRecoilState(categoryListState)
 
-  // category 상태값이 변경되면 로컬 스토리지에 저장
+  // ...
+
+  const categories = useMemo(() => {
+    const categories: CategoryListProps['categoryList'] = { All: 0 }
+
+    edges.forEach(({ node }) => {
+      const { categories: postCategories } = node.frontmatter
+
+      postCategories.forEach(category => {
+        if (categories[category] === undefined) categories[category] = 1
+        else categories[category]++
+      })
+
+      categories.All++
+    })
+
+    return categories
+  }, [edges])
+
   useEffect(() => {
-    localStorage.setItem('category', category)
-  }, [category])
+    setCategoryList(categories)
+  }, [categories])
+
+  useEffect(() => {
+    const parsed: ParsedQuery<string> = queryString.parse(search)
+    const category =
+      typeof parsed.category !== 'string' || !parsed.category
+        ? 'All'
+        : parsed.category
+
+    setSelectedCategory(category)
+  }, [search])
+
+  // console.log(categoryList)
+  // console.log(selectedCategory)
 
   return (
     <Template
@@ -93,14 +97,11 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       image={publicURL}
     >
       <Introduction profileImage={gatsbyImageData} />
-      <ToggleNav></ToggleNav>
-
-      {category === 'open' && (
-        <CategoryList
-          selectedCategory={selectedCategory}
-          categoryList={categoryList}
-        />
-      )}
+      {/* <CategoryList
+        categoryList={categoryList}
+        selectedCategory={selectedCategory}
+      /> */}
+      <ToggleNav />
       <PostList selectedCategory={selectedCategory} posts={edges} />
     </Template>
   )

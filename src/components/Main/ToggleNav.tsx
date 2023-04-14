@@ -1,8 +1,15 @@
 import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import CategoryList from './CategoryList'
+import {
+  selectedCategoryState,
+  categoryListState,
+  categoryState,
+} from '../../recoil/recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 const ToNav = styled.div`
+  position: relative;
   margin-top: 1.5rem !important;
   display: flex;
   justify-content: space-between;
@@ -78,8 +85,16 @@ const Category = styled.div`
   padding-right: 0.5rem;
   font-weight: 600;
   font-size: 0.875rem;
+  margin-left: -5px;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 4px;
   cursor: pointer;
+`
+
+const CategoryCon = styled.div`
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  left: 230px;
 `
 
 export default function ToggleNav() {
@@ -111,12 +126,16 @@ export default function ToggleNav() {
     }
   }, [])
 
-  function handleCategoryClick() {
-    if (typeof window !== 'undefined') {
-      const currentStatus = localStorage.getItem('category')
-      const newStatus = currentStatus === 'open' ? 'close' : 'open'
-      localStorage.setItem('category', newStatus)
-    }
+  const selectedCategory = useRecoilValue(selectedCategoryState)
+  const categoryList = useRecoilValue(categoryListState)
+
+  console.log(categoryList)
+  console.log(selectedCategory)
+
+  const [category, setCategory] = useRecoilState(categoryState)
+
+  const handleClick = () => {
+    setCategory(category === 'open' ? 'close' : 'open')
   }
 
   return (
@@ -172,20 +191,28 @@ export default function ToggleNav() {
             <span>최신</span>
           </NavItem>
         </a>
-        <Category onClick={handleCategoryClick}>
-          <span>카테고리</span>
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            stroke-width="0"
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M7 10l5 5 5-5z"></path>
-          </svg>
-        </Category>
+        <CategoryCon onClick={handleClick}>
+          <Category>
+            <span>{String(selectedCategory)}</span>
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M7 10l5 5 5-5z"></path>
+            </svg>
+          </Category>
+          {category === 'open' && (
+            <CategoryList
+              categoryList={categoryList}
+              selectedCategory={selectedCategory}
+            />
+          )}
+        </CategoryCon>
       </TogNav>
       <Menu>
         <svg
