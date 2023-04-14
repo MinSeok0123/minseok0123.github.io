@@ -10,8 +10,12 @@ export const categoryListState = atom({
   default: {},
 })
 
-
 export const categoryState = atom({
   key: 'categoryState',
-  default: 'close', 
-});
+  default: 'close',
+})
+
+export const activeTabState = atom<string>({
+  key: 'activeTabState',
+  default: '트렌딩',
+})

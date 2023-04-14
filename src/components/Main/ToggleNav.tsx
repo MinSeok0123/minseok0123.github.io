@@ -5,6 +5,7 @@ import {
   selectedCategoryState,
   categoryListState,
   categoryState,
+  activeTabState,
 } from '../../recoil/recoil'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
@@ -98,31 +99,22 @@ const CategoryCon = styled.div`
 `
 
 export default function ToggleNav() {
-  const [activeTab, setActiveTab] = useState<string>(() => {
-    const savedTab =
-      typeof window !== 'undefined' ? localStorage.getItem('tense') : null
-    if (savedTab === '트렌딩' || savedTab === '최신') {
-      return savedTab
-    }
-    return '트렌딩'
-  })
+  const [activeTab, setActiveTab] = useRecoilState(activeTabState)
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName)
     if (typeof window !== 'undefined') {
-      localStorage.setItem('tense', tabName === '트렌딩' ? '트렌딩' : '최신')
+      sessionStorage.setItem('tense', tabName === '트렌딩' ? '트렌딩' : '최신')
     }
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const savedTab = localStorage.getItem('tense')
-      if (savedTab === '트렌딩' || savedTab === '최신') {
-        setActiveTab(savedTab)
-      }
-      if (localStorage.getItem('category')) {
-        localStorage.setItem('category', 'close')
-      }
+    const savedTab = sessionStorage.getItem('tense')
+    if (savedTab === '트렌딩' || savedTab === '최신') {
+      setActiveTab(savedTab)
+    }
+    if (sessionStorage.getItem('category')) {
+      sessionStorage.setItem('category', 'close')
     }
   }, [])
 
