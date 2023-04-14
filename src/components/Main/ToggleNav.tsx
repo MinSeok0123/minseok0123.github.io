@@ -85,10 +85,22 @@ const Category = styled.div`
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 1.5rem;
   margin-left: -5px;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 4px;
   cursor: pointer;
+
+  @media (max-width: 1024px) {
+    width: 5.25rem;
+    font-size: 1.5rem;
+  }
+`
+
+const Catename = styled.span`
+  font-size: 0.875rem;
+  @media (max-width: 1024px) {
+    font-size: 0.75rem;
+  }
 `
 
 const CategoryCon = styled.div`
@@ -185,7 +197,7 @@ export default function ToggleNav() {
         </a>
         <CategoryCon onClick={handleClick}>
           <Category>
-            <span>{String(selectedCategory)}</span>
+            <Catename>{String(selectedCategory)}</Catename>
             <svg
               stroke="currentColor"
               fill="currentColor"

@@ -3,7 +3,7 @@ date: '2023-04-11'
 title: '리액트 props'
 categories: ['Web', 'Backend', 'Hacking', 'Algorithm']
 summary: '리액트 props 사용방법을 알아보자.'
-thumbnail: './react.png'
+thumbnail: './5.png'
 ---
 
 ![./react.png](./react.png)
