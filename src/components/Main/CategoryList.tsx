@@ -74,7 +74,9 @@ const CategoryList: FunctionComponent<CategoryListProps> = function ({
     <CategoryListWrapper>
       {Object.entries(categoryList).map(([name, count]) => (
         <CategoryItem
-          to={`/?category=${name}`}
+          to={`${
+            window.sessionStorage.getItem('tense') === '최신' ? '/recent' : ''
+          }/?category=${name}`}
           active={name === selectedCategory}
           key={name}
         >
