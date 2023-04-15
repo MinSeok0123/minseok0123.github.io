@@ -30,7 +30,15 @@ module.exports = {
     `@skagami/gatsby-plugin-dark-mode`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
-
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // nprogress color 설정
+        color: `#29D`,
+        // nprogress 에니메이션 설정
+        showSpinner: true,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -115,4 +123,3 @@ module.exports = {
     },
   ],
 }
-
