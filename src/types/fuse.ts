@@ -4,7 +4,6 @@ export interface MarkdownNode {
   thumbnail: any
   id: string
   excerpt: string
-  publicURL: string
   fields: {
     slug: string
   }

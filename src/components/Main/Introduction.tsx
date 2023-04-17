@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
+// import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useTheme } from '@skagami/gatsby-plugin-dark-mode'
 import { DarkModeSwitch } from 'react-toggle-dark-mode'
 
-type IntroductionProps = {
-  profileImage: IGatsbyImageData
-}
+// type IntroductionProps = {
+//   profileImage: IGatsbyImageData
+// }
 
 const HeaderCon = styled.div`
   height: 4rem;
