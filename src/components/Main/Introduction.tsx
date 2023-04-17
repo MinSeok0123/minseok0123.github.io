@@ -132,18 +132,6 @@ const Introduction: FunctionComponent<IntroductionProps> = function ({}) {
 
   return (
     <HeaderCon>
-      <ToastContainer
-        position="top-right" // 알람 위치 지정
-        autoClose={2000} // 자동 off 시간
-        hideProgressBar={false} // 진행시간바 숨김
-        closeOnClick // 클릭으로 알람 닫기
-        rtl={false} // 알림 좌우 반전
-        pauseOnFocusLoss // 화면을 벗어나면 알람 정지
-        draggable // 드래그 가능
-        pauseOnHover // 마우스를 올리면 알람 정지
-        theme="light"
-        // limit={1} // 알람 개수 제한
-      />
       <Header>
         <Logo href="/">minlog</Logo>
         <Nav>
@@ -162,18 +150,31 @@ const Introduction: FunctionComponent<IntroductionProps> = function ({}) {
               size={25}
             />
           </Dark>
-          <Search onClick={notify}>
-            <svg width="17" height="17" viewBox="0 0 17 17">
-              <path
-                fill-rule="evenodd"
-                d="M13.66 7.36a6.3 6.3 0 1 1-12.598 0 6.3 6.3 0 0 1 12.598 0zm-1.73 5.772a7.36 7.36 0 1 1 1.201-1.201l3.636 3.635c.31.31.31.815 0 1.126l-.075.075a.796.796 0 0 1-1.126 0l-3.636-3.635z"
-                clip-rule="evenodd"
-                fill="currentColor"
-              ></path>
-            </svg>
-          </Search>
-
-          <About>ABOUT</About>
+          <a href="/search">
+            <Search>
+              <svg width="17" height="17" viewBox="0 0 17 17">
+                <path
+                  fill-rule="evenodd"
+                  d="M13.66 7.36a6.3 6.3 0 1 1-12.598 0 6.3 6.3 0 0 1 12.598 0zm-1.73 5.772a7.36 7.36 0 1 1 1.201-1.201l3.636 3.635c.31.31.31.815 0 1.126l-.075.075a.796.796 0 0 1-1.126 0l-3.636-3.635z"
+                  clip-rule="evenodd"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </Search>
+          </a>
+          <About onClick={notify}>ABOUT</About>
+          <ToastContainer
+            position="top-right" // 알람 위치 지정
+            autoClose={2000} // 자동 off 시간
+            hideProgressBar={false} // 진행시간바 숨김
+            closeOnClick // 클릭으로 알람 닫기
+            rtl={false} // 알림 좌우 반전
+            pauseOnFocusLoss // 화면을 벗어나면 알람 정지
+            draggable // 드래그 가능
+            pauseOnHover // 마우스를 올리면 알람 정지
+            theme="light"
+            // limit={1} // 알람 개수 제한
+          />
         </Nav>
       </Header>
     </HeaderCon>

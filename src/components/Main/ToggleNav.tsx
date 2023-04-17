@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import CategoryList from './CategoryList'
 import {
   selectedCategoryState,

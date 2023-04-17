@@ -1,106 +1,107 @@
-import React, { useState } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import React, { useState, useEffect } from 'react'
 import Fuse from 'fuse.js'
-import { Link } from 'gatsby'
-
-interface Post {
-  node: {
-    id: string
-    excerpt: string
-    frontmatter: {
-      title: string
-      date: string
-      thumbnail: {
-        publicURL: string
-      }
-    }
-    fields: {
-      slug: string
-    }
-  }
-}
-
-interface SearchResult {
-  title: string
-  date: string
-  thumbnail: string
-  excerpt: string
-  slug: string
-}
+import { useStaticQuery, graphql, Link, navigate } from 'gatsby'
+import { FuseResults } from '../types/fuse'
 
 const Search: React.FC = () => {
   const data = useStaticQuery(graphql`
-    query SearchQuery {
+    query {
       allMarkdownRemark {
-        edges {
-          node {
-            id
-            excerpt(pruneLength: 250)
-            frontmatter {
-              title
-              date(formatString: "MMMM DD, YYYY")
-              thumbnail {
-                publicURL
+        nodes {
+          id
+          excerpt(pruneLength: 250)
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            date(formatString: "YYYY.MM.DD")
+            thumbnail {
+              publicURL
+              childImageSharp {
+                fluid(maxWidth: 500) {
+                  ...GatsbyImageSharpFluid
+                }
               }
             }
-            fields {
-              slug
-            }
+            categories
           }
+          rawMarkdownBody
         }
       }
     }
   `)
 
-  const [searchQuery, setSearchQuery] = useState('')
-  const posts = data.allMarkdownRemark.edges as Post[]
+  const [query, setQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<FuseResults>([])
 
-  const options = {
-    keys: [
-      'node.frontmatter.title',
-      'node.frontmatter.date',
-      'node.excerpt',
-      'node.fields.slug',
-    ],
-    threshold: 0.3,
-  }
+  // Updates the search results whenever the query or data changes
+  useEffect(() => {
+    const fuse = new Fuse(data.allMarkdownRemark.nodes, {
+      keys: ['frontmatter.title', 'rawMarkdownBody'],
+    })
 
-  const fuse = new Fuse(posts, options)
+    const results = fuse.search(query) as unknown as FuseResults
 
-  const results = fuse.search(searchQuery) as unknown as Post[]
+    setSearchResults(results)
+  }, [data, query])
 
-  const searchResult: SearchResult[] = results.map(result => ({
-    title: result.node?.frontmatter?.title || '',
-    date: result.node?.frontmatter?.date || '',
-    thumbnail: result.node?.frontmatter?.thumbnail?.publicURL || '',
-    excerpt: result.node?.excerpt || '',
-    slug: result.node?.fields?.slug || '',
-  }))
+  // Updates the query based on the URL query parameter
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const searchQuery = urlParams.get('q')
+    if (searchQuery) {
+      setQuery(searchQuery)
+    }
+  }, [])
 
-  console.log({ searchQuery })
+  // Updates the URL query parameter when the query changes
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    if (query) {
+      urlParams.set('q', query)
+    } else {
+      urlParams.delete('q')
+    }
+    navigate(`/search/?${urlParams.toString()}`, { replace: true })
+  }, [query])
 
   return (
     <div>
       <input
         type="text"
-        onChange={event => setSearchQuery(event.target.value)}
-        value={searchQuery}
+        value={query}
+        onChange={event => setQuery(event.target.value)}
+        placeholder="검색어를 입력하세요"
       />
-      {searchQuery && (
-        <p>
-          {searchResult.length} results found for "{searchQuery}"
-        </p>
+      {searchResults.length > 0 ? (
+        <ul>
+          {searchResults.map(({ item }) => (
+            <li key={item.id}>
+              <Link to={item.fields.slug}>
+                {item.frontmatter.thumbnail && (
+                  <img
+                    src={
+                      item.frontmatter.thumbnail.publicURL ||
+                      item.frontmatter.thumbnail.childImageSharp?.fluid.src
+                    }
+                    alt={item.frontmatter.title}
+                  />
+                )}
+                <div>
+                  <h3>{item.frontmatter.title}</h3>
+                  <p>{item.excerpt}</p>
+                  <p>{item.frontmatter.date}</p>
+                  <p>카테고리: {item.frontmatter.categories}</p>
+                </div>
+              </Link>
+            </li>
+          ))}
+          <p>총 {searchResults.length}개의 포스트를 찾았습니다.</p>
+        </ul>
+      ) : (
+        query && <p>검색 결과가 없습니다.</p>
       )}
-      {searchResult.map(result => (
-        <div key={result.slug}>
-          <Link to={result.slug}>
-            <img src={result.thumbnail} alt={result.title} />
-            <h2>{result.title}</h2>
-            <p>{result.date}</p>
-            <p>{result.excerpt}</p>
-          </Link>
-        </div>
-      ))}
     </div>
   )
 }
