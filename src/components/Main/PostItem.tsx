@@ -66,12 +66,12 @@ const Category = styled.div`
 
 const CategoryItem = styled.div`
   margin: 2.5px 5px;
-  padding: 3px 5px;
-  border-radius: 3px;
-  background: black;
+  padding: 3px 7px;
+  border-radius: 0.1rem;
+  background: var(--bg-tag);
   font-size: 14px;
-  font-weight: 700;
-  color: white;
+  font-weight: 500;
+  color: #12b886;
 `
 
 const Summary = styled.div`
