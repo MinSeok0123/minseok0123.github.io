@@ -36,6 +36,13 @@ const defaultStyle = css`
     --tense: #868e96;
     --velog: #12b886;
     --catebg: #e9ecef;
+    --border1: #343a62;
+    --border2: #adb5bd;
+    --text1: #212529;
+    --text2: #495057;
+    --text3: #868e96;
+    --bg-tag: #f8f9fa;
+    --border4: #f1f3f5;
 
     background-color: var(--bg);
   }
@@ -55,6 +62,13 @@ const defaultStyle = css`
     --tenseactiv: #ececec;
     --tense: #acacac;
     --catebg: #121212;
+    --border1: #e0e0e0;
+    --border2: #a0a0a0;
+    --text1: #ececec;
+    --text2: #d9d9d9;
+    --text3: #acacac;
+    --bg-tag: #252525;
+    --border4: #2a2a2a;
 
     color: var(--textNormal);
   }

@@ -93,7 +93,7 @@ const Search = styled.div`
     transition: all 0.125s ease-in 0s;
   }
   @media (max-width: 1056px) {
-    width: 2.8rem;
+    width: 2rem;
     height: 2rem;
   }
 `
