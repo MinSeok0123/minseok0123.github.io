@@ -117,8 +117,6 @@ const Underline = styled.div`
   height: 2px;
   bottom: 0px;
   background: var(--border1);
-  transition: left 0.5s ease-out;
-  animation-fill-mode: forwards;
 `
 
 export default function ToggleNav() {
