@@ -43,6 +43,7 @@
     "gatsby-styled-components-dark-mode": "^2.0.5",
     "gatsby-transformer-remark": "^6.8.0",
     "gatsby-transformer-sharp": "^5.8.0",
+    "install": "^0.13.0",
     "mdbreact": "^5.2.0",
     "prismjs": "^1.29.0",
     "query-string": "^8.1.0",

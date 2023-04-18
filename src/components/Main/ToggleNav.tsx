@@ -38,8 +38,9 @@ const ToNav = styled.div`
 `
 
 const TogNav = styled.div`
-  width: 320px;
+  width: 224px;
   height: 48px;
+  position: relative;
   display: flex;
   align-items: center;
 `
@@ -108,6 +109,15 @@ const CategoryCon = styled.div`
   z-index: 1;
   top: 8px;
   left: 230px;
+`
+
+const Underline = styled.div`
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  bottom: 0px;
+  background: var(--border1);
+  transition: left 0.3s ease-out;
 `
 
 export default function ToggleNav() {
@@ -195,6 +205,11 @@ export default function ToggleNav() {
             <span>최신</span>
           </NavItem>
         </a>
+        <Underline
+          style={{
+            left: activeTab === '트렌딩' ? '0%' : '50%',
+          }}
+        />
         <CategoryCon onClick={handleClick}>
           <Category>
             <Catename>{String(selectedCategory)}</Catename>
