@@ -42,7 +42,7 @@ const Search: React.FC = () => {
   useEffect(() => {
     const timerId = setTimeout(() => {
       setDebouncedQuery(query)
-    }, 500)
+    }, 300)
 
     return () => {
       clearTimeout(timerId)
@@ -80,6 +80,7 @@ const Search: React.FC = () => {
   return (
     <div>
       <Introduction />
+      <title>minlog | 검색</title>
       <SearchBox>
         <div>
           <SearchBoxWrap>
@@ -144,7 +145,10 @@ const Search: React.FC = () => {
             ))}
           </div>
         ) : (
-          debouncedQuery && searchResults.length === 0 && <NotFound>검색 결과가 없습니다.</NotFound>
+          debouncedQuery &&
+          searchResults.length === 0 && (
+            <NotFound>검색 결과가 없습니다.</NotFound>
+          )
         )}
       </SearchBox>
       <GlobalStyle />
