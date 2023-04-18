@@ -37,16 +37,27 @@ const Search: React.FC = () => {
 
   const [query, setQuery] = useState('')
   const [searchResults, setSearchResults] = useState<FuseResults>([])
+  const [debouncedQuery, setDebouncedQuery] = useState('')
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedQuery(query)
+    }, 500)
+
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [query])
 
   useEffect(() => {
     const fuse = new Fuse(data.allMarkdownRemark.nodes, {
       keys: ['frontmatter.title', 'rawMarkdownBody'],
     })
 
-    const results = fuse.search(query) as unknown as FuseResults
+    const results = fuse.search(debouncedQuery) as unknown as FuseResults
 
     setSearchResults(results)
-  }, [data, query])
+  }, [data, debouncedQuery])
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -133,7 +144,7 @@ const Search: React.FC = () => {
             ))}
           </div>
         ) : (
-          query && <NotFound>검색 결과가 없습니다.</NotFound>
+          debouncedQuery && searchResults.length === 0 && <NotFound>검색 결과가 없습니다.</NotFound>
         )}
       </SearchBox>
       <GlobalStyle />
@@ -333,7 +344,7 @@ export const NotFound = styled.p`
   margin-bottom: 4rem;
   font-size: 1.125rem;
   line-height: 1.5;
-  color: #495057;
+  color: var(--text2);
 
   @media (max-width: 768px) {
     font-size: 1rem;

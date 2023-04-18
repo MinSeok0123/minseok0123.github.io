@@ -104,10 +104,11 @@ const About = styled.button`
   height: 2rem;
   font-size: 1rem;
   border-radius: 1rem;
-  border: 1px solid black;
+  border: 1px solid var(--bg-element5);
+  color: var(--bg-element5);
   font-weight: 600;
   outline: none;
-  background-color: white;
+  background-color: var(--bg-element2);
   cursor: pointer;
   :hover {
     background-color: black;
