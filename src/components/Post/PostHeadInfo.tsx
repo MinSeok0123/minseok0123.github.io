@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'gatsby'
 
 export type PostHeadInfoProps = {
   title: string
@@ -9,17 +10,17 @@ export type PostHeadInfoProps = {
   categories: string[]
 }
 
-const PostHeadInfoWrapper = styled.div`
-  margin-top: 5.5rem;
-  width: 768px;
-  margin-left: auto;
-  margin-right: auto;
+// const PostHeadInfoWrapper = styled.div`
+//   margin-top: 5.5rem;
+//   width: 768px;
+//   margin-left: auto;
+//   margin-right: auto;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    padding: 40px 20px;
-  }
-`
+//   @media (max-width: 768px) {
+//     width: 100%;
+//     padding: 40px 20px;
+//   }
+// `
 
 // const PrevPageIcon = styled.div`
 //   display: grid;
@@ -102,7 +103,6 @@ const Cate = styled.div`
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
-  cursor: pointer;
 `
 
 const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
@@ -126,10 +126,12 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
         <CateWrap>
           {Array.isArray(categories) &&
             categories.map((category, index) => (
-              <Cate key={index}>
-                {index > 0}
-                {category}
-              </Cate>
+              <Link to={`/?category=${category}`}>
+                <Cate key={index}>
+                  {index > 0}
+                  {category}
+                </Cate>
+              </Link>
             ))}
         </CateWrap>
       </HeadWrap>
