@@ -1,12 +1,10 @@
 ---
 date: '2023-04-11'
-title: '리액트 props'
-categories: ['Web', 'Backend', 'Hacking', 'Algorithm']
-summary: '리액트 props 사용방법을 알아보자.'
-thumbnail: './5.png'
+title: '리액트 props 사용하는 이유'
+categories: ['Web', 'React']
+summary: '리액트는 UI 라이브러리로서, 컴포넌트를 사용하여 UI를 구성한다. 이 때, 컴포넌트 간의 데이터 전달을 위해 프로퍼티(Props)를 사용해야한다.'
+thumbnail: './1.png'
 ---
-
-![./react.png](./react.png)
 
 # 1. 리액트 프로퍼티 (props)를 사용하는 이유
 

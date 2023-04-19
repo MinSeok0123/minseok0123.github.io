@@ -43,6 +43,10 @@ const TogNav = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: 160px;
+  }
 `
 
 const NavItem = styled.div`
@@ -56,6 +60,11 @@ const NavItem = styled.div`
   text-decoration: none;
   height: 3rem;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    width: 5rem;
+  }
 `
 
 const Icon = styled.div`

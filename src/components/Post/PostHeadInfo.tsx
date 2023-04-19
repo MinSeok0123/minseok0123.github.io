@@ -86,6 +86,12 @@ const CateWrap = styled.div`
   margin-top: 0.875rem;
   margin-bottom: -0.875rem;
   min-height: 0.875rem;
+
+  @media (max-width: 768px) {
+    margin-top: 0.5rem;
+    margin-bottom: -0.5rem;
+    min-height: 0.5rem;
+  }
 `
 
 const Cate = styled.div`
@@ -103,6 +109,16 @@ const Cate = styled.div`
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    height: 1.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 `
 
 const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
