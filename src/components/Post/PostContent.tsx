@@ -58,10 +58,13 @@ const MarkdownRenderer = styled.div`
 
   // Adjust Quotation Element Style
   blockquote {
-    margin: 30px 0;
-    padding: 5px 15px;
-    border-left: 2px solid var(--hr);
-    font-weight: 800;
+    margin: 2rem 0px;
+    border-left: 4px solid var(--velog);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: var(--bg-element2);
+    padding: 1rem 1rem 1rem 2rem;
+    color: var(--text1);
   }
 
   // Adjust List Element Style
@@ -98,6 +101,8 @@ const MarkdownRenderer = styled.div`
   code[class*='language-'],
   pre[class*='language-'] {
     tab-size: 2;
+    background: var(--prism-bg);
+    color: var(--prism-default-text);
   }
 
   // Markdown Responsive Design
