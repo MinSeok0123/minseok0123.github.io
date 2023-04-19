@@ -1,5 +1,6 @@
-import React, { createRef, FunctionComponent, useEffect } from 'react'
-import styled from '@emotion/styled'
+import React, { useEffect, useRef } from 'react'
+import { useRecoilValue } from 'recoil'
+import { themeState } from '../../recoil/recoil'
 
 const src = 'https://utteranc.es/client.js'
 const repo = 'minseok0123/minseok0123.github.io' // 자신 계정의 레포지토리로 설정
@@ -14,19 +15,9 @@ type UtterancesAttributesType = {
   async: string
 }
 
-const UtterancesWrapper = styled.div`
-  @media (max-width: 768px) {
-    padding: 0 20px;
-  }
-
-  ${({ theme }) =>
-    theme === 'dark' &&
-    `
-  `}
-`
-
-const CommentWidget: FunctionComponent<{ id: string }> = function ({ id }) {
-  const element = createRef<HTMLDivElement>()
+const CommentWidget = ({ id }: { id: string }) => {
+  const element = useRef<HTMLDivElement>(null)
+  const theme = useRecoilValue(themeState)
 
   useEffect(() => {
     if (element.current === null) return
@@ -38,10 +29,7 @@ const CommentWidget: FunctionComponent<{ id: string }> = function ({ id }) {
       repo,
       'issue-term': 'pathname',
       label: 'Comment',
-      theme: `github-${
-        (typeof window !== 'undefined' && localStorage.getItem('theme')) ||
-        'light'
-      }`,
+      theme: `github-${theme}`,
       crossorigin: 'anonymous',
       async: 'true',
     }
@@ -50,19 +38,16 @@ const CommentWidget: FunctionComponent<{ id: string }> = function ({ id }) {
       utterances.setAttribute(key, value)
     })
 
-    element.current.appendChild(utterances)
-  }, [])
+    // 이전에 생성된 스크립트 엘리먼트 삭제
+    const utterancesWrapper = element.current
+    while (utterancesWrapper.firstChild) {
+      utterancesWrapper.removeChild(utterancesWrapper.firstChild)
+    }
 
-  return (
-    <UtterancesWrapper
-      ref={element}
-      id={id}
-      theme={
-        (typeof window !== 'undefined' && localStorage.getItem('theme')) ||
-        'light'
-      }
-    />
-  )
+    element.current.appendChild(utterances)
+  }, [theme, id])
+
+  return <div ref={element} id={id} />
 }
 
 export default CommentWidget

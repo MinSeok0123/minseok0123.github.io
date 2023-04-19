@@ -19,3 +19,8 @@ export const activeTabState = atom<string>({
   key: 'activeTabState',
   default: '트렌딩',
 })
+
+export const themeState = atom<'light' | 'dark'>({
+  key: 'themeState',
+  default: 'light',
+})

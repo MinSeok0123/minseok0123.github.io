@@ -5,6 +5,8 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useTheme } from '@skagami/gatsby-plugin-dark-mode'
 import { DarkModeSwitch } from 'react-toggle-dark-mode'
+import { useRecoilState } from 'recoil'
+import { themeState } from '../../recoil/recoil'
 
 // type IntroductionProps = {
 //   profileImage: IGatsbyImageData
@@ -127,9 +129,10 @@ const Introduction: FunctionComponent<IntroductionProps> = function ({}) {
     setDarkMode(checked)
   }
 
-  if (theme === null) {
-    return null
-  }
+  const [globalTheme, setGlobalTheme] = useRecoilState(themeState)
+  React.useEffect(() => {
+    setGlobalTheme(theme === 'light' ? 'light' : 'dark')
+  }, [theme, setGlobalTheme])
 
   return (
     <HeaderCon>
