@@ -46,6 +46,8 @@ const defaultStyle = css`
     --bg-tag: #f8f9fa;
     --border4: #f1f3f5;
 
+    --prism-bg: #fbfcfd;
+    --prism-default-text: #24292e;
     background-color: var(--bg);
   }
 
@@ -74,6 +76,8 @@ const defaultStyle = css`
     --bg-tag: #252525;
     --border4: #2a2a2a;
 
+    --prism-bg: #1e1e1e;
+    --prism-default-text: #e0e6f1;
     color: var(--textNormal);
   }
 `
