@@ -27,6 +27,12 @@ module.exports = {
         icon: `src/images/M.png`,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'G-JTESYL916S',
+      },
+    },
     `@skagami/gatsby-plugin-dark-mode`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'gatsby'
 
+
 export type PostHeadInfoProps = {
   title: string
   date: string
@@ -78,8 +79,7 @@ const DateWrap = styled.div`
 `
 
 const Date = styled.span`
-  color: var(--text1);
-  font-weight: bold;
+  color: var(--text2);
 `
 
 const CateWrap = styled.div`

@@ -26,15 +26,13 @@ const CategoryListWrapper = styled.div`
   width: 192px;
   position: absolute;
   top: 45px;
-  left: -100px;
+  left: -101px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px 0px;
 
-  /* @media (max-width: 768px) {
-    width: 100%;
-    margin-top: 50px;
-    padding: 0 20px;
-  } */
+  @media (max-width: 768px) {
+    left: -113px;
+  }
 `
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

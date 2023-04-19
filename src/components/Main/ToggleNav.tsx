@@ -71,6 +71,10 @@ const Icon = styled.div`
   margin-top: 0.4rem;
   margin-right: 0.5rem;
   font-size: 1.5rem;
+
+  @media (max-width: 944px) {
+    font-size: 1.2rem;
+  }
 `
 
 const Menu = styled.div`
@@ -118,6 +122,10 @@ const CategoryCon = styled.div`
   z-index: 1;
   top: 8px;
   left: 230px;
+
+  @media (max-width: 768px) {
+    left: 165px;
+  }
 `
 
 const Underline = styled.div`
