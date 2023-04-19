@@ -10,13 +10,10 @@ export type PostHeadInfoProps = {
 }
 
 const PostHeadInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  margin-top: 5.5rem;
   width: 768px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 60px 0;
-  color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -24,57 +21,88 @@ const PostHeadInfoWrapper = styled.div`
   }
 `
 
-const PrevPageIcon = styled.div`
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #ffffff;
-  color: #000000;
-  font-size: 22px;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+// const PrevPageIcon = styled.div`
+//   display: grid;
+//   place-items: center;
+//   width: 40px;
+//   height: 40px;
+//   border-radius: 50%;
+//   background: #ffffff;
+//   color: #000000;
+//   font-size: 22px;
+//   cursor: pointer;
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-  @media (max-width: 768px) {
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
+//   @media (max-width: 768px) {
+//     width: 30px;
+//     height: 30px;
+//     font-size: 18px;
+//   }
+// `
+
+const HeadWrap = styled.div`
+  @media (max-width: 1024px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 `
 
-const Title = styled.div`
-  display: -webkit-box;
-  overflow: hidden;
-  overflow-wrap: break-word;
-  margin-top: auto;
-  text-overflow: ellipsis;
-  white-space: normal;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  font-size: 45px;
+const Title = styled.h1`
+  font-size: 3rem;
+  line-height: 1.5;
+  letter-spacing: -0.004em;
+  margin-top: 0px;
   font-weight: 800;
+  color: var(--text1);
+  margin-bottom: 2rem;
+  word-break: keep-all;
+  transition: color 0.125s ease-in 0s;
 
-  @media (max-width: 768px) {
-    font-size: 30px;
+  @media (max-width: 1024px) {
+    font-size: 2.25rem;
   }
 `
 
-const PostData = styled.div`
-  display: flex;
-  justify-content: space-between;
+const DateWrap = styled.div`
+  -webkit-box-align: center;
   align-items: center;
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: 700;
-  
+  font-size: 1rem;
+  color: var(--text2);
+  display: flex;
+  -webkit-box-pack: justify;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 15px;
-    font-weight: 400;
+    margin-bottom: 0.75rem;
   }
+`
+
+const Date = styled.span`
+  color: var(--text1);
+  font-weight: bold;
+`
+
+const CateWrap = styled.div`
+  margin-top: 0.875rem;
+  margin-bottom: -0.875rem;
+  min-height: 0.875rem;
+`
+
+const Cate = styled.div`
+  margin-bottom: 0.875rem;
+  background: var(--bg-tag);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 2rem;
+  border-radius: 1rem;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-right: 0.875rem;
+  color: var(--velog);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
 `
 
 const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
@@ -82,19 +110,31 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
   date,
   categories,
 }) {
-  const goBackPage = () => window.history.back()
+  // const goBackPage = () => window.history.back()
 
   return (
-    <PostHeadInfoWrapper>
-      <PrevPageIcon onClick={goBackPage}>
-        <FontAwesomeIcon icon={faArrowLeft} />
-      </PrevPageIcon>
-      <Title>{title}</Title>
-      <PostData>
-        <div>{categories.join(' / ')}</div>
-        <div>{date}</div>
-      </PostData>
-    </PostHeadInfoWrapper>
+    <>
+      {/* <PostHeadInfoWrapper> */}
+      {/* <PrevPageIcon onClick={goBackPage}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </PrevPageIcon> */}
+      <HeadWrap>
+        <Title>{title}</Title>
+        <DateWrap>
+          <Date>{date}</Date>
+        </DateWrap>
+        <CateWrap>
+          {Array.isArray(categories) &&
+            categories.map((category, index) => (
+              <Cate key={index}>
+                {index > 0}
+                {category}
+              </Cate>
+            ))}
+        </CateWrap>
+      </HeadWrap>
+      {/* </PostHeadInfoWrapper> */}
+    </>
   )
 }
 

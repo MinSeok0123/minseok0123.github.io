@@ -80,7 +80,8 @@ const Search: React.FC = () => {
   return (
     <div>
       <Introduction />
-      <title>minlog | 검색</title>
+      <html lang="ko" />
+      <title>minlog</title>
       <SearchBox>
         <div>
           <SearchBoxWrap>
@@ -103,7 +104,7 @@ const Search: React.FC = () => {
         {searchResults.length > 0 && (
           <TotalPost>
             <p>
-              총 <b>{searchResults.length}</b>개의 포스트를 찾았습니다.
+              총 <b>{searchResults.length}개의</b> 포스트를 찾았습니다.
             </p>
           </TotalPost>
         )}
@@ -189,7 +190,7 @@ export const StyledInput = styled.input`
   background: transparent;
   color: var(--text1);
   min-width: 0px;
-  font-weight: 350;
+  font-weight: 400;
 
   @media (max-width: 768px) {
     flex: 1 1 0%;
@@ -206,12 +207,12 @@ export const SearchBoxWrap = styled.div`
   align-items: center;
   transition: all 0.125s ease-in 0s;
   cursor: text;
-  border: 1px solid var(--border1);
+  border: 1px solid var(--border2);
   height: 4rem;
   padding: 0px 1.5rem;
 
   &:focus-within {
-    border-color: var(--border2);
+    border-color: var(--border1);
   }
 
   @media (max-width: 768px) {
@@ -266,7 +267,7 @@ export const ContentsDiv = styled.div`
   border-bottom: 1px solid var(--border4);
 
   @media (max-width: 768px) {
-    padding-top: 2rem;
+    padding-top: 1rem;
     padding-bottom: 2rem;
   }
 `
