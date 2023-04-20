@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 import { themeState } from '../../recoil/recoil'
+import styled from '@emotion/styled'
 
 const src = 'https://utteranc.es/client.js'
 const repo = 'minseok0123/minseok0123.github.io' // 자신 계정의 레포지토리로 설정
@@ -14,6 +15,12 @@ type UtterancesAttributesType = {
   crossorigin: string
   async: string
 }
+
+const UtterancesWrapper = styled.div`
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+`
 
 const CommentWidget = ({ id }: { id: string }) => {
   const element = useRef<HTMLDivElement>(null)
@@ -47,7 +54,7 @@ const CommentWidget = ({ id }: { id: string }) => {
     element.current.appendChild(utterances)
   }, [theme, id])
 
-  return <div ref={element} id={id} />
+  return <UtterancesWrapper ref={element} id={id} />
 }
 
 export default CommentWidget

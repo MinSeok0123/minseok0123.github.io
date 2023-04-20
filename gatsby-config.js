@@ -7,6 +7,13 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'G-JTESYL916S',
+        head: true,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-typescript',
       options: {
         isTSX: true,
@@ -25,12 +32,6 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         icon: `src/images/M.png`,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: 'G-JTESYL916S',
       },
     },
     `@skagami/gatsby-plugin-dark-mode`,
