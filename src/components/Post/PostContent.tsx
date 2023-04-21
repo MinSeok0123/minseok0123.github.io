@@ -21,8 +21,13 @@ const MarkdownRenderer = styled.div`
 
   // Apply Padding Attribute to All Elements
   p {
-
     padding: 3px 0;
+  }
+
+  img {
+    display: block;
+    margin: 3rem auto;
+    max-width: 100%;
   }
 
   // Adjust Heading Element Style
@@ -31,12 +36,20 @@ const MarkdownRenderer = styled.div`
   h3 {
     font-weight: 800;
     margin-bottom: 30px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 10px;
+    }
   }
 
   * + h1,
   * + h2,
   * + h3 {
     margin-top: 80px;
+
+    @media (max-width: 768px) {
+      margin-top: 30px;
+    }
   }
 
   hr + h1,
@@ -92,6 +105,11 @@ const MarkdownRenderer = styled.div`
     margin: 30px 0;
     padding: 15px;
     font-size: 15px;
+
+    @media (max-width: 768px) {
+      font-size: 0.75rem;
+      margin: 20px 0;
+    }
 
     ::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.5);

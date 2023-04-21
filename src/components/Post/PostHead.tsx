@@ -35,15 +35,13 @@ const BackgroundImage = styled((props: GatsbyImgProps) => (
   <GatsbyImage {...props} style={{ position: 'relative' }} />
 ))`
   z-index: -1;
-  width: 95%;
-  height: 400px;
-  object-fit: cover;
-  /* filter: brightness(0.25); */
   display: block;
-  margin: 2rem auto 0px;
+  margin: 3rem auto;
+  max-width: 100%;
 
   @media (max-width: 768px) {
-    height: 300px;
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 `
 
