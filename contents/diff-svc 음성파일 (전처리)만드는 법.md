@@ -1,5 +1,5 @@
 ---
-date: '2023-02-21'
+date: '2023-04-21'
 title: 'diff-svc 음성파일 (전처리)만드는 법'
 categories: ['Python', 'diff-svc']
 summary: 'PyDub 라이브러리를 사용하여 음성 파일을 자동으로 분리하고 무음을 제거하는 Python 코드입니다. diff-svc 음성파일을 더 쉽게 만들기 위해 제작하였습니다.'

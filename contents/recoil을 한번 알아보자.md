@@ -1,5 +1,5 @@
 ---
-date: '2023-02-21'
+date: '2023-04-21'
 title: 'recoil을 한번 알아보자'
 categories: ['Web', 'Frontend', 'React']
 summary: 'Recoil은 페이스북에서 만든 React 상태 관리 라이브러리입니다. React는 기본적으로 단방향 데이터 흐름을 따르기 때문에 복잡한 상태 관리를 위해서는 상태를 끌어올리거나 Redux와 같은 상태 관리 라이브러리를 사용해야 했습니다. 하지만 Recoil은 기존 React 컴포넌트 내에서 상태를 관리할 수 있도록 해줍니다.'
