@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
+import tocbot from 'tocbot'
+
 
 type PostContentProps = {
   html: string
@@ -154,7 +156,23 @@ const MarkdownRenderer = styled.div`
 `
 
 const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
-  return <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
+  React.useEffect(() => {
+    tocbot.init({
+      tocSelector: '.toc',
+      contentSelector: '.markdown-body',
+      headingSelector: 'h1, h2, h3',
+      scrollSmooth: true,
+    })
+  }, [])
+  return (
+    <>
+      <div className="toc" />
+      <MarkdownRenderer
+        className="markdown-body"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    </>
+  )
 }
 
 export default PostContent
