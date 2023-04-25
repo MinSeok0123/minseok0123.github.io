@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import tocbot from 'tocbot'
 
-
 type PostContentProps = {
   html: string
 }
@@ -155,6 +154,46 @@ const MarkdownRenderer = styled.div`
   }
 `
 
+const Toc = styled.div`
+  position: fixed;
+  top: 35%;
+  left: 77%;
+  width: 240px;
+  overflow: hidden auto;
+  padding: 0.25rem 0.75rem;
+  line-height: 1.5;
+  border-left: 2px solid var(--border4);
+  max-height: calc(100vh - 128px);
+  font-size: 0.875rem;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+
+    ::marker {
+      content: '';
+    }
+  }
+
+  a {
+    color: var(--text3);
+    text-decoration: none;
+
+    &:hover {
+      transition: all 0.125s ease-in 0s;
+      color: var(--text1);
+      transform: scale(1.05);
+    }
+  }
+`
+
 const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
   React.useEffect(() => {
     tocbot.init({
@@ -166,7 +205,7 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
   }, [])
   return (
     <>
-      <div className="toc" />
+      <Toc className="toc" />
       <MarkdownRenderer
         className="markdown-body"
         dangerouslySetInnerHTML={{ __html: html }}

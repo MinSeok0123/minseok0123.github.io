@@ -6253,14 +6253,14 @@ gatsby-remark-autolink-headers@^6.9.0:
     mdast-util-to-string "^2.0.0"
     unist-util-visit "^2.0.3"
 
-gatsby-remark-copy-linked-files@^6.8.0:
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-copy-linked-files/-/gatsby-remark-copy-linked-files-6.8.0.tgz#ba9e13a072cb81986027fe897111d2fc24758aae"
-  integrity sha512-7BfvRfuJSMkq4pvDGB43iyg6TZfUEQy7URWRxYq4VdUixDWazqkE887v/Ry390YWXQe/DPSEiC62Fl7l5UiRmQ==
+gatsby-remark-copy-linked-files@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-copy-linked-files/-/gatsby-remark-copy-linked-files-6.9.0.tgz#d50d86c04233cb3f30427eb52a5ebc47763a0ea6"
+  integrity sha512-qdwLWCVv5WRrFJltavNd8j2sGlm7ESbedByrhN2bE01Oog00cdVI0P3j0Pqwf5rmfZXecbz+VK7M8VMC6lb5Vg==
   dependencies:
     "@babel/runtime" "^7.20.13"
     cheerio "^1.0.0-rc.10"
-    fs-extra "^11.1.0"
+    fs-extra "^11.1.1"
     is-relative-url "^3.0.0"
     lodash "^4.17.21"
     path-is-inside "^1.0.2"
@@ -6277,15 +6277,15 @@ gatsby-remark-external-links@^0.0.4:
     unist-util-find "^1.0.1"
     unist-util-visit "^1.1.3"
 
-gatsby-remark-images@^7.8.0:
-  version "7.8.0"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-7.8.0.tgz#bd2d31f909dfe2886eeee53413a0275b9b224a0d"
-  integrity sha512-4adZUzhTbtycuhFBDxiHlDrrxFAIMWRyjwscczjJpR/0wi+Towgducq0xwXi41BC31Kt+W78tsUvJsdHc9cAcg==
+gatsby-remark-images@^7.9.0:
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-7.9.0.tgz#5d3d11d9e983c82f4960889a2dce5e4acbbb8565"
+  integrity sha512-sSQP5BUZ3UmgOuEtkyghYPqyKvgWG0QmP6Lpvnt0F2+bpj59crRfG2qDzRYFUbJ6JlQNLneitY76W/ynnRFsOg==
   dependencies:
     "@babel/runtime" "^7.20.13"
     chalk "^4.1.2"
     cheerio "^1.0.0-rc.10"
-    gatsby-core-utils "^4.8.0"
+    gatsby-core-utils "^4.9.0"
     is-relative-url "^3.0.0"
     lodash "^4.17.21"
     mdast-util-definitions "^4.0.0"
@@ -6293,19 +6293,19 @@ gatsby-remark-images@^7.8.0:
     unist-util-select "^3.0.4"
     unist-util-visit-parents "^3.1.1"
 
-gatsby-remark-prismjs@^7.8.0:
-  version "7.8.0"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-prismjs/-/gatsby-remark-prismjs-7.8.0.tgz#18bbe029ed2a8fe068cf6d4123321fb0076a3962"
-  integrity sha512-hIaoxOXD+hWbRjAzwixQ1Vga7pvZ5QiF2BaJfU2on10wGmzNPP9tz+P4iAlYxgAySHdKK/5r1x/BgULpwdVSAw==
+gatsby-remark-prismjs@^7.9.0:
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-prismjs/-/gatsby-remark-prismjs-7.9.0.tgz#b0b1156c8d7b2c8d5b75bc3e2cb046b64b8f8b08"
+  integrity sha512-SSOO3FxIERCL+GmGMxDz0GRXj6UiCWIlKOBY32HZGQ7a1RctW5wVKFe14l4FbD85yyBA14+9TbTUKhyFd4vNIw==
   dependencies:
     "@babel/runtime" "^7.20.13"
-    parse-numeric-range "^1.2.0"
+    parse-numeric-range "^1.3.0"
     unist-util-visit "^2.0.3"
 
-gatsby-remark-smartypants@^6.8.0:
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-smartypants/-/gatsby-remark-smartypants-6.8.0.tgz#e4532e04522c798c534c215dc5caa620f14bc983"
-  integrity sha512-6NYQGLg3/mCmWCsyzh4ysX0egaWaQ/l6zLQthQ0MCxTTd6Dx497PsLqUaAS6SpNJl6WTcSNm2uGBdy/m5q69Nw==
+gatsby-remark-smartypants@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-smartypants/-/gatsby-remark-smartypants-6.9.0.tgz#029baf81e56032f6b051d5aafe0327a806a147c6"
+  integrity sha512-/GVQMPAwm+JMCvY6QrpUOScoEq74sg7vm9wmTHS136XTjS5+gWeTcA61JnueeZFDVcUwFrGp3RKS0uuntXpTUQ==
   dependencies:
     "@babel/runtime" "^7.20.13"
     retext "^7.0.1"
@@ -9275,7 +9275,7 @@ parse-latin@^4.0.0:
     unist-util-modify-children "^2.0.0"
     unist-util-visit-children "^1.0.0"
 
-parse-numeric-range@^1.2.0:
+parse-numeric-range@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/parse-numeric-range/-/parse-numeric-range-1.3.0.tgz#7c63b61190d61e4d53a1197f0c83c47bb670ffa3"
   integrity sha512-twN+njEipszzlMJd4ONUYgSfZPDxgHhT9Ahed5uTigpQn90FggW4SA/AIPq/6a149fTbE9qBEcSwE3FAEp6wQQ==
@@ -10231,6 +10231,11 @@ react-toastify@^9.1.2:
   integrity sha512-PBfzXO5jMGEtdYR5jxrORlNZZe/EuOkwvwKijMatsZZm8IZwLj01YvobeJYNjFcA6uy6CVrx2fzL9GWbhWPTDA==
   dependencies:
     clsx "^1.1.1"
+
+react-toc@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-toc/-/react-toc-3.1.0.tgz#9914189b5932f4f79c0c29df9bd72ed4d1883afa"
+  integrity sha512-JPvMScVqu8NuguplaM74lerkXVh4ASnnF6vrjUoHS0fTxOsNrLJEagwdfTXopY3iBMAuOFx9pOwuRYi8UfL4wQ==
 
 react-toggle-dark-mode@^1.1.1:
   version "1.1.1"
