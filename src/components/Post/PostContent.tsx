@@ -156,8 +156,8 @@ const MarkdownRenderer = styled.div`
 
 const Toc = styled.div`
   position: fixed;
-  top: 35%;
-  left: 77%;
+  top: calc(35% + 20px);
+  right: calc((100vw - 728px) / 2 - 380px);
   width: 240px;
   overflow: hidden auto;
   padding: 0.25rem 0.75rem;
@@ -165,6 +165,14 @@ const Toc = styled.div`
   border-left: 2px solid var(--border4);
   max-height: calc(100vh - 128px);
   font-size: 0.875rem;
+
+  @media (max-width: 1500px) {
+    right: calc((100vw - 728px) / 2 - 300px);
+  }
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
 
   ul {
     list-style: none;
@@ -183,9 +191,12 @@ const Toc = styled.div`
   }
 
   a {
+    margin-left: 12px;
+    margin-top: 4px;
+    display: block;
     color: var(--text3);
     text-decoration: none;
-
+    transition: all 0.125s ease-in 0s;
     &:hover {
       transition: all 0.125s ease-in 0s;
       color: var(--text1);
@@ -201,6 +212,7 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
       contentSelector: '.markdown-body',
       headingSelector: 'h1, h2, h3',
       scrollSmooth: true,
+      hasInnerContainers: true,
     })
   }, [])
   return (
