@@ -54,13 +54,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/static`,
-      },
-    },
-    {
       resolve: `gatsby-plugin-sharp`,
       options: {
         formats: ['auto', 'webp'],
@@ -86,7 +79,7 @@ module.exports = {
               maintainCase: true,
               removeAccents: true,
               isIconAfterHeader: true,
-              elements: [`h2`, `h3`, `h4`],
+              elements: [`h1`, `h2`, `h3`, `h4`],
             },
           },
           {

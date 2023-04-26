@@ -243,23 +243,22 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
   return (
     <TocWrapper>
-      <ul>
-        {headings.map((heading, index) => (
-          <li key={heading.id}>
-            <a
-              href={`#${heading.id}`}
-              style={{
-                fontWeight: index === activeIndex ? 'bold' : 'normal',
-                ...(index === activeIndex && { color: 'red' }),
-              }}
-            >
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
+      {headings.map((heading, index) => (
+        <div key={heading.id}>
+          <a
+            href={`#${heading.id}`}
+            style={{
+              fontWeight: index === activeIndex ? 'bold' : 'normal',
+              ...(index === activeIndex && { color: 'red' }),
+            }}
+          >
+            {heading.text}
+          </a>
+        </div>
+      ))}
     </TocWrapper>
   )
 }
