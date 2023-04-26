@@ -1,6 +1,5 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
-import tocbot from 'tocbot'
 
 type PostContentProps = {
   html: string
@@ -154,7 +153,7 @@ const MarkdownRenderer = styled.div`
   }
 `
 
-const Toc = styled.div`
+const TocWrapper = styled.div`
   position: fixed;
   top: calc(35% + 20px);
   right: calc((100vw - 728px) / 2 - 380px);
@@ -205,19 +204,85 @@ const Toc = styled.div`
   }
 `
 
-const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
-  React.useEffect(() => {
-    tocbot.init({
-      tocSelector: '.toc',
-      contentSelector: '.markdown-body',
-      headingSelector: 'h1, h2, h3',
-      scrollSmooth: true,
-      hasInnerContainers: true,
-    })
+type TocProps = {
+  headings: Array<{ id: string; text: string }>
+}
+
+const Toc: FunctionComponent<TocProps> = ({ headings }) => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
+  useEffect(() => {
+    function handleScroll() {
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
+
+      const headingElements = document.querySelectorAll(
+        '.markdown-body h1, .markdown-body h2, .markdown-body h3',
+      )
+      const headingOffsets = Array.from(headingElements).map(headingElement => {
+        const elementTop =
+          headingElement.getBoundingClientRect().top + scrollTop
+        const headingId = headingElement.getAttribute('id') || ''
+        return { top: elementTop, id: headingId }
+      })
+
+      const index = headingOffsets.findIndex(({ top }) => top > scrollTop + 80)
+      if (index === -1) {
+        setActiveIndex(headingOffsets.length - 1)
+      } else if (index > 0) {
+        setActiveIndex(index - 1)
+      } else {
+        setActiveIndex(null)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
   return (
+    <TocWrapper>
+      <ul>
+        {headings.map((heading, index) => (
+          <li key={heading.id}>
+            <a
+              href={`#${heading.id}`}
+              style={{
+                fontWeight: index === activeIndex ? 'bold' : 'normal',
+                ...(index === activeIndex && { color: 'red' }),
+              }}
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </TocWrapper>
+  )
+}
+
+const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
+  const [headings, setHeadings] = React.useState<
+    Array<{ id: string; text: string }>
+  >([])
+
+  useEffect(() => {
+    const headingElements = document.querySelectorAll(
+      '.markdown-body h1, .markdown-body h2, .markdown-body h3',
+    )
+    const headings = Array.from(headingElements).map(headingElement => ({
+      id: headingElement.getAttribute('id') || '',
+      text: headingElement.textContent || '',
+    }))
+    setHeadings(headings)
+  }, [])
+
+  return (
     <>
-      <Toc className="toc" />
+      <Toc headings={headings} />
       <MarkdownRenderer
         className="markdown-body"
         dangerouslySetInnerHTML={{ __html: html }}
