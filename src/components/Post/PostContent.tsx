@@ -370,17 +370,23 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
     })
   }
 
-  const [value, setValue] = useState<number>(
-    Number(window.sessionStorage.getItem('value')) || 0,
-  )
+  const [value, setValue] = useState(0)
 
-  function handleClick(): void {
+  function handleClick() {
     setValue(value === 0 ? 1 : 0)
+    toast.error('공사중', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+      transition: Flip,
+    })
   }
 
-  useEffect(() => {
-    window.sessionStorage.setItem('value', value.toString())
-  }, [value])
   return (
     <>
       <ShareWrap
