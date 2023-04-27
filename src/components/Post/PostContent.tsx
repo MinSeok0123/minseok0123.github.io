@@ -154,8 +154,7 @@ const MarkdownRenderer = styled.div`
 `
 
 const TocWrapper = styled.div`
-  position: fixed;
-  top: calc(35% + 20px);
+  position: absolute;
   right: calc((100vw - 728px) / 2 - 340px);
   width: 240px;
   overflow: hidden auto;
@@ -230,6 +229,7 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
 
 const Toc: FunctionComponent<TocProps> = ({ headings }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [isFixed, setIsFixed] = useState(false)
 
   useEffect(() => {
     function handleScroll() {
@@ -254,6 +254,12 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
       } else {
         setActiveIndex(null)
       }
+
+      if (scrollTop > 240) {
+        setIsFixed(true)
+      } else {
+        setIsFixed(false)
+      }
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -265,7 +271,12 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
   }, [])
 
   return (
-    <TocWrapper>
+    <TocWrapper
+      style={{
+        position: isFixed ? 'fixed' : 'absolute',
+        top: isFixed ? '112px' : 'calc(35% + 20px)',
+      }}
+    >
       {headings.map((heading, index) => (
         <div
           key={heading.id}
