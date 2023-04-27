@@ -156,7 +156,7 @@ const MarkdownRenderer = styled.div`
 const TocWrapper = styled.div`
   position: fixed;
   top: calc(35% + 20px);
-  right: calc((100vw - 728px) / 2 - 380px);
+  right: calc((100vw - 728px) / 2 - 340px);
   width: 240px;
   overflow: hidden auto;
   padding: 0.25rem 0.75rem;
@@ -167,14 +167,15 @@ const TocWrapper = styled.div`
   font-size: 0.875rem;
 
   @media (max-width: 1500px) {
-    right: calc((100vw - 728px) / 2 - 300px);
+    right: calc((100vw - 728px) / 2 - 280px);
   }
 
   @media (max-width: 1200px) {
     display: none;
   }
 
-  a {
+  a:hover {
+    color: var(--text1);
   }
 
   div {
