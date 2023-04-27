@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
+import copy from 'copy-to-clipboard'
+import { toast, ToastContainer, Flip } from 'react-toastify'
 
 type PostContentProps = {
   html: string
@@ -195,6 +197,89 @@ const TocWrapper = styled.div`
   }
 `
 
+const ShareWrap = styled.div`
+  position: absolute;
+  left: calc((100vw - 728px) / 2 - 130px);
+  height: 150px;
+  width: 64px;
+  display: flex;
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
+`
+
+const Share = styled.div`
+  width: 4rem;
+  background: var(--bg-element2);
+  border: 1px solid var(--border4);
+  border-radius: 2rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+`
+
+const Heart = styled.div`
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background: var(--bg-element1);
+  border: 1px solid var(--border3);
+  border-radius: 1.5rem;
+  color: var(--text3);
+  cursor: pointer;
+  z-index: 5;
+  :hover {
+    border-color: var(--text1);
+    color: var(--text1);
+  }
+`
+
+const Icon = styled.svg`
+  width: 24px;
+  height: 24px;
+`
+
+const Like = styled.div`
+  margin-top: 0.5rem;
+  color: var(--text2);
+  line-height: 1;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+`
+
+const ShareBtn = styled.div`
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background: var(--bg-element1);
+  border: 1px solid var(--border3);
+  border-radius: 1.5rem;
+  color: var(--text3);
+  cursor: pointer;
+  z-index: 5;
+  :hover {
+    border-color: var(--text1);
+    color: var(--text1);
+  }
+`
+
+const ShareIcon = styled.svg`
+  width: 24px;
+  height: 24px;
+`
+
 type TocProps = {
   headings: Array<{ id: string; text: string; level: number }>
 }
@@ -269,31 +354,93 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+  const copyToClipboard = () => {
+    const url = window.location.href
+    copy(url)
+    toast.success('링크가 복사되었습니다.', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+      transition: Flip,
+    })
+  }
 
+  const [value, setValue] = useState<number>(
+    Number(window.sessionStorage.getItem('value')) || 0,
+  )
+
+  function handleClick(): void {
+    setValue(value === 0 ? 1 : 0)
+  }
+
+  useEffect(() => {
+    window.sessionStorage.setItem('value', value.toString())
+  }, [value])
   return (
-    <TocWrapper
-      style={{
-        position: isFixed ? 'fixed' : 'absolute',
-        top: isFixed ? '112px' : 'calc(35% + 20px)',
-      }}
-    >
-      {headings.map((heading, index) => (
-        <div
-          key={heading.id}
-          className={`toc-level-${heading.level}`}
-          style={{
-            ...(index === activeIndex && {
-              transform: 'scale(1.05)',
-              display: 'block',
-              transition: 'all 0.125s ease-in 0s',
-              color: 'var(--text1)',
-            }),
-          }} // 클래스 이름에 레벨 정보를 추가
-        >
-          <a href={`#${heading.id}`}>{heading.text}</a>
-        </div>
-      ))}
-    </TocWrapper>
+    <>
+      <ShareWrap
+        style={{
+          position: isFixed ? 'fixed' : 'absolute',
+          top: isFixed ? '112px' : '355px',
+        }}
+      >
+        <Share>
+          <Heart
+            onClick={handleClick}
+            style={{
+              backgroundColor: value ? 'rgb(56, 217, 169)' : '',
+              color: value ? 'var(--button-text)' : '',
+              borderColor: value ? 'rgb(56, 217, 169)' : '',
+            }}
+          >
+            <Icon>
+              <path
+                fill="currentColor"
+                d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"
+              ></path>
+            </Icon>
+          </Heart>
+          <Like>{value}</Like>
+          <ShareBtn onClick={copyToClipboard}>
+            <ShareIcon>
+              <path
+                fill="currentColor"
+                d="M5 7c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5zm11.122 12.065c-.073.301-.122.611-.122.935 0 2.209 1.791 4 4 4s4-1.791 4-4-1.791-4-4-4c-1.165 0-2.204.506-2.935 1.301l-5.488-2.927c-.23.636-.549 1.229-.943 1.764l5.488 2.927zm7.878-15.065c0-2.209-1.791-4-4-4s-4 1.791-4 4c0 .324.049.634.122.935l-5.488 2.927c.395.535.713 1.127.943 1.764l5.488-2.927c.731.795 1.77 1.301 2.935 1.301 2.209 0 4-1.791 4-4z"
+              ></path>
+            </ShareIcon>
+          </ShareBtn>
+          <ToastContainer />
+        </Share>
+      </ShareWrap>
+      <TocWrapper
+        style={{
+          position: isFixed ? 'fixed' : 'absolute',
+          top: isFixed ? '112px' : '355px',
+        }}
+      >
+        {headings.map((heading, index) => (
+          <div
+            key={heading.id}
+            className={`toc-level-${heading.level}`}
+            style={{
+              ...(index === activeIndex && {
+                transform: 'scale(1.05)',
+                display: 'block',
+                transition: 'all 0.125s ease-in 0s',
+                color: 'var(--text1)',
+              }),
+            }} // 클래스 이름에 레벨 정보를 추가
+          >
+            <a href={`#${heading.id}`}>{heading.text}</a>
+          </div>
+        ))}
+      </TocWrapper>
+    </>
   )
 }
 

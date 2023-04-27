@@ -40,11 +40,13 @@ const defaultStyle = css`
     --catebg: #e9ecef;
     --border1: #343a62;
     --border2: #adb5bd;
+    --border3: #dee2e6;
     --text1: #212529;
     --text2: #495057;
     --text3: #868e96;
     --bg-tag: #f8f9fa;
     --border4: #f1f3f5;
+    --button-text: #ffffff;
 
     --prism-bg: #fbfcfd;
     --prism-default-text: #24292e;
@@ -70,11 +72,13 @@ const defaultStyle = css`
     --catebg: #121212;
     --border1: #e0e0e0;
     --border2: #a0a0a0;
+    --border3: #4d4d4d;
     --text1: #ececec;
     --text2: #d9d9d9;
     --text3: #acacac;
     --bg-tag: #252525;
     --border4: #2a2a2a;
+    --button-text: #121212;
 
     --prism-bg: #1e1e1e;
     --prism-default-text: #e0e6f1;
