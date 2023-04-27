@@ -162,6 +162,7 @@ const TocWrapper = styled.div`
   padding: 0.25rem 0.75rem;
   line-height: 1.5;
   border-left: 2px solid var(--border4);
+  color: var(--text3);
   max-height: calc(100vh - 128px);
   font-size: 0.875rem;
 
@@ -173,39 +174,57 @@ const TocWrapper = styled.div`
     display: none;
   }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    margin: 0;
-    padding: 0;
-    line-height: 1.5;
-
-    ::marker {
-      content: '';
-    }
-  }
-
   a {
-    margin-left: 12px;
-    margin-top: 4px;
+  }
+
+  div {
     display: block;
-    color: var(--text3);
-    text-decoration: none;
     transition: all 0.125s ease-in 0s;
-    &:hover {
-      transition: all 0.125s ease-in 0s;
-      color: var(--text1);
-      transform: scale(1.05);
-    }
+  }
+
+  .toc-level-1 {
+    margin-left: 0;
+  }
+  .toc-level-2 {
+    margin-top: 4px;
+    margin-left: 12px;
+  }
+  .toc-level-3 {
+    margin-top: 4px;
+    margin-left: 24px;
   }
 `
 
 type TocProps = {
-  headings: Array<{ id: string; text: string }>
+  headings: Array<{ id: string; text: string; level: number }>
+}
+
+const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
+  const [headings, setHeadings] = React.useState<
+    Array<{ id: string; text: string; level: number }>
+  >([])
+
+  useEffect(() => {
+    const headingElements = document.querySelectorAll(
+      '.markdown-body h1, .markdown-body h2, .markdown-body h3',
+    )
+    const headings = Array.from(headingElements).map(headingElement => ({
+      id: headingElement.getAttribute('id') || '',
+      text: headingElement.textContent || '',
+      level: Number(headingElement.tagName.charAt(1)),
+    }))
+    setHeadings(headings)
+  }, [])
+
+  return (
+    <>
+      <Toc headings={headings} />
+      <MarkdownRenderer
+        className="markdown-body"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    </>
+  )
 }
 
 const Toc: FunctionComponent<TocProps> = ({ headings }) => {
@@ -247,46 +266,22 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
   return (
     <TocWrapper>
       {headings.map((heading, index) => (
-        <div key={heading.id}>
-          <a
-            href={`#${heading.id}`}
-            style={{
-              fontWeight: index === activeIndex ? 'bold' : 'normal',
-              ...(index === activeIndex && { color: 'red' }),
-            }}
-          >
-            {heading.text}
-          </a>
+        <div
+          key={heading.id}
+          className={`toc-level-${heading.level}`}
+          style={{
+            ...(index === activeIndex && {
+              transform: 'scale(1.05)',
+              display: 'block',
+              transition: 'all 0.125s ease-in 0s',
+              color: 'var(--text1)',
+            }),
+          }} // 클래스 이름에 레벨 정보를 추가
+        >
+          <a href={`#${heading.id}`}>{heading.text}</a>
         </div>
       ))}
     </TocWrapper>
-  )
-}
-
-const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
-  const [headings, setHeadings] = React.useState<
-    Array<{ id: string; text: string }>
-  >([])
-
-  useEffect(() => {
-    const headingElements = document.querySelectorAll(
-      '.markdown-body h1, .markdown-body h2, .markdown-body h3',
-    )
-    const headings = Array.from(headingElements).map(headingElement => ({
-      id: headingElement.getAttribute('id') || '',
-      text: headingElement.textContent || '',
-    }))
-    setHeadings(headings)
-  }, [])
-
-  return (
-    <>
-      <Toc headings={headings} />
-      <MarkdownRenderer
-        className="markdown-body"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </>
   )
 }
 
