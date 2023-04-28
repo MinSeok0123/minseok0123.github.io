@@ -199,7 +199,7 @@ const TocWrapper = styled.div`
 
 const ShareWrap = styled.div`
   position: absolute;
-  left: calc((100vw - 728px) / 2 - 130px);
+  left: calc((100vw - 728px) / 2 - 140px);
   height: 150px;
   width: 64px;
   display: flex;
