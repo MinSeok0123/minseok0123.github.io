@@ -8,6 +8,7 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode'
 import { useRecoilState } from 'recoil'
 import { themeState } from '../../recoil/recoil'
 
+
 // type IntroductionProps = {
 //   profileImage: IGatsbyImageData
 // }
