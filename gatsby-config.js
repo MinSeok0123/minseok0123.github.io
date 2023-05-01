@@ -50,7 +50,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        icon: `src/images/M.png`,
+        icon: `src/images/minlog.png`,
       },
     },
     `@skagami/gatsby-plugin-dark-mode`,
