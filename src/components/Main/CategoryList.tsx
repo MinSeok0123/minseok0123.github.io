@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
+import { motion } from 'framer-motion'
 
 type CategoryItemProps = {
   active: boolean
@@ -26,7 +27,7 @@ const CategoryListWrapper = styled.div`
   width: 192px;
   position: absolute;
   top: 45px;
-  left: -101px;
+  left: -100px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px 0px;
 
@@ -69,19 +70,29 @@ const CategoryList: FunctionComponent<CategoryListProps> = function ({
   categoryList,
 }) {
   return (
-    <CategoryListWrapper>
-      {Object.entries(categoryList).map(([name, count]) => (
-        <CategoryItem
-          to={`${
-            window.sessionStorage.getItem('tense') === '최신' ? '/recent' : ''
-          }/?category=${name}`}
-          active={name === selectedCategory}
-          key={name}
-        >
-          {name} ({count})
-        </CategoryItem>
-      ))}
-    </CategoryListWrapper>
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <CategoryListWrapper>
+          {Object.entries(categoryList).map(([name, count]) => (
+            <CategoryItem
+              to={`${
+                window.sessionStorage.getItem('tense') === '최신'
+                  ? '/recent'
+                  : ''
+              }/?category=${name}`}
+              active={name === selectedCategory}
+              key={name}
+            >
+              {name} ({count})
+            </CategoryItem>
+          ))}
+        </CategoryListWrapper>
+      </motion.div>
+    </>
   )
 }
 
