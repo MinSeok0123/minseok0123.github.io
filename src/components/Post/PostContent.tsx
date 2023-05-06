@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import copy from 'copy-to-clipboard'
 import { toast, ToastContainer, Flip } from 'react-toastify'
 
-
 type PostContentProps = {
   html: string
 }
@@ -421,7 +420,7 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
               ></path>
             </ShareIcon>
           </ShareBtn>
-          <ToastContainer />
+          <ToastContainer style={{ zIndex: 1 }} />
         </Share>
       </ShareWrap>
       <TocWrapper
