@@ -420,13 +420,14 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
               ></path>
             </ShareIcon>
           </ShareBtn>
-          <ToastContainer style={{ zIndex: 1 }} />
+          <ToastContainer />
         </Share>
       </ShareWrap>
       <TocWrapper
         style={{
           position: isFixed ? 'fixed' : 'absolute',
           top: isFixed ? '112px' : '355px',
+          zIndex: -1,
         }}
       >
         {headings.map((heading, index) => (
