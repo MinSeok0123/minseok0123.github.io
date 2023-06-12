@@ -301,6 +301,28 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
     setHeadings(headings)
   }, [])
 
+  useEffect(() => {
+    const pathname = window.location.pathname
+    const decodedValue = decodeURIComponent(pathname.replace(/^\/+|\/+$/g, ''))
+    fetch(
+      'http://localhost:8080/api/view_count/' +
+        encodeURIComponent(decodedValue),
+      {
+        method: 'POST',
+      },
+    )
+      .then(response => {
+        if (response.ok) {
+          console.log('조회수 업데이트 성공')
+        } else {
+          console.log('조회수 업데이트 실패')
+        }
+      })
+      .catch(error => {
+        console.log('조회수를 업데이트하는 중에 오류가 발생했습니다.:', error)
+      })
+  }, [])
+
   return (
     <>
       <Toc headings={headings} />
@@ -354,6 +376,34 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  const [likeCount, setLikeCount] = useState<number>(0)
+
+  useEffect(() => {
+    const pathname = window.location.pathname
+    const decodedValue = decodeURIComponent(pathname.replace(/^\/+|\/+$/g, ''))
+
+    fetch(
+      `http://localhost:8080/api/get_count/${encodeURIComponent(decodedValue)}`,
+      {
+        method: 'POST',
+      },
+    )
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error('네트워크 응답이 좋지 않았습니다.')
+        }
+      })
+      .then(data => {
+        setLikeCount(data.like_count)
+      })
+      .catch(error => {
+        console.log('조회수, 좋아요를 불러오는데 에러 발생:', error)
+      })
+  }, [])
+
   const copyToClipboard = () => {
     const url = window.location.href
     copy(url)
@@ -370,21 +420,54 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
     })
   }
 
-  const [value, setValue] = useState(0)
+  const toggleLikeStatus = () => {
+    const apiKey = process.env.API_KEY
+    const pathname = window.location.pathname
+    const decodedValue = decodeURIComponent(pathname.replace(/^\/+|\/+$/g, ''))
+
+    if (likeCount > 0) {
+      fetch(
+        `http://API_KEY:8080/api/like_decrease/${encodeURIComponent(
+          decodedValue,
+        )}`,
+        {
+          method: 'POST',
+        },
+      )
+        .then(response => {
+          if (response.ok) {
+            setLikeCount(likeCount - 1) // 업데이트된 likeCount 변수를 반영
+          } else {
+            console.log('좋아요 감소 실패')
+          }
+        })
+        .catch(error => {
+          console.log('좋아요를 감소하는 중에 오류가 발생했습니다.:', error)
+        })
+    } else {
+      fetch(
+        `http://localhost:8080/api/like_increase/${encodeURIComponent(
+          decodedValue,
+        )}`,
+        {
+          method: 'POST',
+        },
+      )
+        .then(response => {
+          if (response.ok) {
+            setLikeCount(likeCount + 1) // 업데이트된 likeCount 변수를 반영
+          } else {
+            console.log('좋아요 증가 실패')
+          }
+        })
+        .catch(error => {
+          console.log('좋아요를 증가하는 중에 오류가 발생했습니다.:', error)
+        })
+    }
+  }
 
   function handleClick() {
-    setValue(value === 0 ? 1 : 0)
-    toast.error('공사중', {
-      position: 'top-right',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'colored',
-      transition: Flip,
-    })
+    toggleLikeStatus()
   }
 
   return (
@@ -399,9 +482,9 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
           <Heart
             onClick={handleClick}
             style={{
-              backgroundColor: value ? 'rgb(56, 217, 169)' : '',
-              color: value ? 'var(--button-text)' : '',
-              borderColor: value ? 'rgb(56, 217, 169)' : '',
+              backgroundColor: likeCount ? 'rgb(56, 217, 169)' : '',
+              color: likeCount ? 'var(--button-text)' : '',
+              borderColor: likeCount ? 'rgb(56, 217, 169)' : '',
             }}
           >
             <Icon>
@@ -411,7 +494,7 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
               ></path>
             </Icon>
           </Heart>
-          <Like>{value}</Like>
+          <Like>{likeCount}</Like>
           <ShareBtn onClick={copyToClipboard}>
             <ShareIcon>
               <path
