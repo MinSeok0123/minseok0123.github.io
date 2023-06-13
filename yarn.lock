@@ -5386,6 +5386,11 @@ dotenv-expand@^5.1.0:
   resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
   integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
 
+dotenv@^16.1.4:
+  version "16.1.4"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.1.4.tgz#67ac1a10cd9c25f5ba604e4e08bc77c0ebe0ca8c"
+  integrity sha512-m55RtE8AsPeJBpOIFKihEmqUcoVncQIwo7x9U8ZwLEZw9ZpXboz2c+rvog+jUaJvVrZ5kBOeYQBX5+8Aa/OZQw==
+
 dotenv@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-7.0.0.tgz#a2be3cd52736673206e8a85fb5210eea29628e7c"
@@ -6749,10 +6754,10 @@ gatsby-plugin-emotion@^8.8.0:
     "@babel/runtime" "^7.20.13"
     "@emotion/babel-preset-css-prop" "^11.10.0"
 
-gatsby-plugin-firebase@^0.2.0-beta.4:
-  version "0.2.0-beta.4"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-firebase/-/gatsby-plugin-firebase-0.2.0-beta.4.tgz#a4d8bfdce8c65efa284d0c523f8524c28f4a786c"
-  integrity sha512-F1uh9T5dY38aeNvKzqj+3K655dce1QS70wuG4bhV9L3cnTJR2vitTWyIoCvRJJfPs7Xq7LgjUDmHDrEos4S3gQ==
+gatsby-plugin-env-variables@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-env-variables/-/gatsby-plugin-env-variables-2.3.0.tgz#bc47617bd78f8f68ff72b3c4c7a2ae7ae464fbc1"
+  integrity sha512-HvVzuapa1jZ0fHtvw4hRlu3Zi5boPLYejVkULnzSmzpSz6UrIj88eEk8WaiKrxkp0CDK9VmXweAdx6U3AwgCog==
 
 gatsby-plugin-flexsearch@^1.0.3:
   version "1.0.3"
