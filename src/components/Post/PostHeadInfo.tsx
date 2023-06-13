@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
@@ -71,14 +71,34 @@ const DateWrap = styled.div`
   color: var(--text2);
   display: flex;
   -webkit-box-pack: justify;
+  justify-content: space-between;
 
   @media (max-width: 768px) {
     margin-bottom: 0.75rem;
   }
 `
 
+const Information = styled.div``
+
 const Date = styled.span`
   color: var(--text2);
+  font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+  }
+`
+
+const Separator = styled.span`
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+`
+
+const View = styled.span`
+  font-size: 1rem;
+  color: var(--text2);
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+  }
 `
 
 const CateWrap = styled.div`
@@ -127,6 +147,39 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
 }) {
   // const goBackPage = () => window.history.back()
 
+  const [viewCount, setViewCount] = useState(0)
+
+  useEffect(() => {
+    const fetchViewCount = async () => {
+      try {
+        const pathname = window.location.pathname
+        const decodedValue = decodeURIComponent(
+          pathname.replace(/^\/+|\/+$/g, ''),
+        )
+
+        const response = await fetch(
+          `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/get_count/${encodeURIComponent(
+            decodedValue,
+          )}`,
+          {
+            method: 'POST',
+          },
+        )
+
+        if (response.ok) {
+          const data = await response.json()
+          setViewCount(data.view_count)
+        } else {
+          throw new Error('네트워크 응답이 좋지 않았습니다.')
+        }
+      } catch (error) {
+        console.log('조회수, 좋아요를 불러오는데 에러 발생:', error)
+      }
+    }
+
+    fetchViewCount()
+  }, [])
+
   return (
     <>
       {/* <PostHeadInfoWrapper> */}
@@ -136,7 +189,12 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
       <HeadWrap>
         <Title>{title}</Title>
         <DateWrap>
-          <Date>{date}</Date>
+          <Information>
+            <Date>{date}</Date>
+            <Separator>·</Separator>
+            <View>조회수: {viewCount}</View>
+          </Information>
+          <div>좋아요</div>
         </DateWrap>
         <CateWrap>
           {Array.isArray(categories) &&
