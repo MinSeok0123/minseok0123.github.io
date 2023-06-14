@@ -305,7 +305,7 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
     const pathname = window.location.pathname
     const decodedValue = decodeURIComponent(pathname.replace(/^\/+|\/+$/g, ''))
     fetch(
-      'http://localhost:8080/api/view_count/' +
+      'https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/view_count/' +
         encodeURIComponent(decodedValue),
       {
         method: 'POST',
@@ -378,30 +378,38 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
   }, [])
 
   const [likeCount, setLikeCount] = useState<number>(0)
+  const [likeStatus, setLikeStatus] = useState<boolean>()
 
   useEffect(() => {
-    const pathname = window.location.pathname
-    const decodedValue = decodeURIComponent(pathname.replace(/^\/+|\/+$/g, ''))
+    const fetchLikeCount = async () => {
+      try {
+        const pathname = window.location.pathname
+        const decodedValue = decodeURIComponent(
+          pathname.replace(/^\/+|\/+$/g, ''),
+        )
+        const response = await fetch(
+          `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/get_count/${encodeURIComponent(
+            decodedValue,
+          )}`,
+          {
+            method: 'POST',
+          },
+        )
 
-    fetch(
-      `http://localhost:8080/api/get_count/${encodeURIComponent(decodedValue)}`,
-      {
-        method: 'POST',
-      },
-    )
-      .then(response => {
         if (response.ok) {
-          return response.json()
+          const data = await response.json()
+          setLikeCount(data.like_count)
+          setLikeStatus(data.liked)
+          console.log(data.liked)
         } else {
           throw new Error('네트워크 응답이 좋지 않았습니다.')
         }
-      })
-      .then(data => {
-        setLikeCount(data.like_count)
-      })
-      .catch(error => {
+      } catch (error) {
         console.log('조회수, 좋아요를 불러오는데 에러 발생:', error)
-      })
+      }
+    }
+
+    fetchLikeCount()
   }, [])
 
   const copyToClipboard = () => {
@@ -420,54 +428,32 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
     })
   }
 
-  const toggleLikeStatus = () => {
-    const apiKey = process.env.API_KEY
-    const pathname = window.location.pathname
-    const decodedValue = decodeURIComponent(pathname.replace(/^\/+|\/+$/g, ''))
+  const handleClick = async () => {
+    try {
+      const pathname = window.location.pathname
+      const decodedValue = decodeURIComponent(
+        pathname.replace(/^\/+|\/+$/g, ''),
+      )
+      const response = await fetch(
+        `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/like/${encodeURIComponent(
+          decodedValue,
+        )}`,
+        {
+          method: 'PUT',
+        },
+      )
 
-    if (likeCount > 0) {
-      fetch(
-        `http://API_KEY:8080/api/like_decrease/${encodeURIComponent(
-          decodedValue,
-        )}`,
-        {
-          method: 'POST',
-        },
-      )
-        .then(response => {
-          if (response.ok) {
-            setLikeCount(likeCount - 1) // 업데이트된 likeCount 변수를 반영
-          } else {
-            console.log('좋아요 감소 실패')
-          }
-        })
-        .catch(error => {
-          console.log('좋아요를 감소하는 중에 오류가 발생했습니다.:', error)
-        })
-    } else {
-      fetch(
-        `http://localhost:8080/api/like_increase/${encodeURIComponent(
-          decodedValue,
-        )}`,
-        {
-          method: 'POST',
-        },
-      )
-        .then(response => {
-          if (response.ok) {
-            setLikeCount(likeCount + 1) // 업데이트된 likeCount 변수를 반영
-          } else {
-            console.log('좋아요 증가 실패')
-          }
-        })
-        .catch(error => {
-          console.log('좋아요를 증가하는 중에 오류가 발생했습니다.:', error)
-        })
+      if (response.ok) {
+        const data = await response.json()
+        setLikeCount(data.like_count)
+        setLikeStatus(data.liked)
+        console.log(data.liked)
+      } else {
+        throw new Error('네트워크 응답이 좋지 않았습니다.')
+      }
+    } catch (error) {
+      console.log('좋아요를 업데이트하는 동안 에러 발생:', error)
     }
-  }
-
-  function handleClick() {
-    toggleLikeStatus()
   }
 
   return (
@@ -482,9 +468,9 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
           <Heart
             onClick={handleClick}
             style={{
-              backgroundColor: likeCount ? 'rgb(56, 217, 169)' : '',
-              color: likeCount ? 'var(--button-text)' : '',
-              borderColor: likeCount ? 'rgb(56, 217, 169)' : '',
+              backgroundColor: likeStatus ? 'rgb(56, 217, 169)' : '',
+              color: likeStatus ? 'var(--button-text)' : '',
+              borderColor: likeStatus ? 'rgb(56, 217, 169)' : '',
             }}
           >
             <Icon>
