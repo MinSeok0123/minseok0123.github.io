@@ -289,7 +289,6 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
     Array<{ id: string; text: string; level: number }>
   >([])
 
-  const apiKey = process.env.GATSBY_API_URL
   useEffect(() => {
     const headingElements = document.querySelectorAll(
       '.markdown-body h1, .markdown-body h2, .markdown-body h3',
@@ -305,9 +304,13 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
   useEffect(() => {
     const pathname = window.location.pathname
     const decodedValue = decodeURIComponent(pathname.replace(/^\/+|\/+$/g, ''))
-    fetch(`${apiKey}/api/view_count/` + encodeURIComponent(decodedValue), {
-      method: 'POST',
-    })
+    fetch(
+      `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/view_count/` +
+        encodeURIComponent(decodedValue),
+      {
+        method: 'POST',
+      },
+    )
       .then(response => {
         if (response.ok) {
           console.log('조회수 업데이트 성공')
@@ -334,8 +337,6 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
 const Toc: FunctionComponent<TocProps> = ({ headings }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [isFixed, setIsFixed] = useState(false)
-
-  const apiKey = process.env.GATSBY_API_URL
 
   useEffect(() => {
     function handleScroll() {
@@ -388,7 +389,9 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
           pathname.replace(/^\/+|\/+$/g, ''),
         )
         const response = await fetch(
-          `${apiKey}/api/get_count/${encodeURIComponent(decodedValue)}`,
+          `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/get_count/${encodeURIComponent(
+            decodedValue,
+          )}`,
           {
             method: 'POST',
           },
@@ -434,7 +437,9 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
         pathname.replace(/^\/+|\/+$/g, ''),
       )
       const response = await fetch(
-        `${apiKey}/api/like/${encodeURIComponent(decodedValue)}`,
+        `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/like/${encodeURIComponent(
+          decodedValue,
+        )}`,
         {
           method: 'PUT',
         },

@@ -180,8 +180,6 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
   const [likeCount, setLikeCount] = useState<number>(0)
   const [likeStatus, setLikeStatus] = useState<boolean>()
 
-  const apiKey = process.env.GATSBY_API_URL
-
   useEffect(() => {
     const fetchViewCount = async () => {
       try {
@@ -190,7 +188,9 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
           pathname.replace(/^\/+|\/+$/g, ''),
         )
         const response = await fetch(
-          `${apiKey}/api/get_count/${encodeURIComponent(decodedValue)}`,
+          `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/get_count/${encodeURIComponent(
+            decodedValue,
+          )}`,
           {
             method: 'POST',
           },
@@ -220,7 +220,9 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
         pathname.replace(/^\/+|\/+$/g, ''),
       )
       const response = await fetch(
-        `${apiKey}/api/like/${encodeURIComponent(decodedValue)}`,
+        `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/like/${encodeURIComponent(
+          decodedValue,
+        )}`,
         {
           method: 'PUT',
         },
