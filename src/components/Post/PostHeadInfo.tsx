@@ -80,6 +80,34 @@ const DateWrap = styled.div`
 
 const Information = styled.div``
 
+const Like = styled.div`
+  display: none;
+  @media (max-width: 1024px) {
+    display: flex;
+    background: var(--bg-element1);
+    border: 1px solid var(--border2);
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 1.5rem;
+    border-radius: 0.75rem;
+    outline: none;
+  }
+`
+
+const Heartsvg = styled.svg`
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.75rem;
+`
+
+const LikeCount = styled.span`
+  font-size: 0.75rem;
+  font-weight: bold;
+`
+
 const Date = styled.span`
   color: var(--text2);
   font-weight: bold;
@@ -148,6 +176,8 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
   // const goBackPage = () => window.history.back()
 
   const [viewCount, setViewCount] = useState(0)
+  const [likeCount, setLikeCount] = useState<number>(0)
+  const [likeStatus, setLikeStatus] = useState<boolean>()
 
   useEffect(() => {
     const fetchViewCount = async () => {
@@ -169,6 +199,8 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
         if (response.ok) {
           const data = await response.json()
           setViewCount(data.view_count)
+          setLikeCount(data.like_count)
+          setLikeStatus(data.liked)
         } else {
           throw new Error('네트워크 응답이 좋지 않았습니다.')
         }
@@ -179,6 +211,34 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
 
     fetchViewCount()
   }, [])
+
+  const handleClick = async () => {
+    try {
+      const pathname = window.location.pathname
+      const decodedValue = decodeURIComponent(
+        pathname.replace(/^\/+|\/+$/g, ''),
+      )
+      const response = await fetch(
+        `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/like/${encodeURIComponent(
+          decodedValue,
+        )}`,
+        {
+          method: 'PUT',
+        },
+      )
+
+      if (response.ok) {
+        const data = await response.json()
+        setLikeCount(data.like_count)
+        setLikeStatus(data.liked)
+        console.log(data.liked)
+      } else {
+        throw new Error('네트워크 응답이 좋지 않았습니다.')
+      }
+    } catch (error) {
+      console.log('좋아요를 업데이트하는 동안 에러 발생:', error)
+    }
+  }
 
   return (
     <>
@@ -194,7 +254,22 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
             <Separator>·</Separator>
             <View>조회수: {viewCount}</View>
           </Information>
-          <div>좋아요</div>
+          <Like
+            onClick={handleClick}
+            style={{
+              backgroundColor: likeStatus ? 'rgb(56, 217, 169)' : '',
+              color: likeStatus ? 'var(--button-text)' : 'var(--text3)',
+              borderColor: likeStatus ? 'rgb(56, 217, 169)' : '',
+            }}
+          >
+            <Heartsvg width="24" height="24" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"
+              ></path>
+            </Heartsvg>
+            <LikeCount>{likeCount}</LikeCount>
+          </Like>
         </DateWrap>
         <CateWrap>
           {Array.isArray(categories) &&
