@@ -253,7 +253,11 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
           <Information>
             <Date>{date}</Date>
             <Separator>·</Separator>
-            {isLoading ? <View /> : <View>조회수: {viewCount}</View>}
+            {isLoading ? (
+              <View>조회수: </View>
+            ) : (
+              <View>조회수: {viewCount}</View>
+            )}
           </Information>
           <Like
             onClick={handleClick}
