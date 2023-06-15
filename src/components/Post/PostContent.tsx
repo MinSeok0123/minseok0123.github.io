@@ -289,6 +289,7 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
     Array<{ id: string; text: string; level: number }>
   >([])
 
+  const apiKey = process.env.GATSBY_API_URL
   useEffect(() => {
     const headingElements = document.querySelectorAll(
       '.markdown-body h1, .markdown-body h2, .markdown-body h3',
@@ -304,13 +305,9 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
   useEffect(() => {
     const pathname = window.location.pathname
     const decodedValue = decodeURIComponent(pathname.replace(/^\/+|\/+$/g, ''))
-    fetch(
-      'https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/view_count/' +
-        encodeURIComponent(decodedValue),
-      {
-        method: 'POST',
-      },
-    )
+    fetch(`${apiKey}/api/view_count/` + encodeURIComponent(decodedValue), {
+      method: 'POST',
+    })
       .then(response => {
         if (response.ok) {
           console.log('조회수 업데이트 성공')
@@ -337,6 +334,8 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
 const Toc: FunctionComponent<TocProps> = ({ headings }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [isFixed, setIsFixed] = useState(false)
+
+  const apiKey = process.env.GATSBY_API_URL
 
   useEffect(() => {
     function handleScroll() {
@@ -377,6 +376,7 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
     }
   }, [])
 
+  const [isLoading, setIsLoading] = useState(true)
   const [likeCount, setLikeCount] = useState<number>(0)
   const [likeStatus, setLikeStatus] = useState<boolean>()
 
@@ -388,9 +388,7 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
           pathname.replace(/^\/+|\/+$/g, ''),
         )
         const response = await fetch(
-          `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/get_count/${encodeURIComponent(
-            decodedValue,
-          )}`,
+          `${apiKey}/api/get_count/${encodeURIComponent(decodedValue)}`,
           {
             method: 'POST',
           },
@@ -400,6 +398,7 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
           const data = await response.json()
           setLikeCount(data.like_count)
           setLikeStatus(data.liked)
+          setIsLoading(false)
           console.log(data.liked)
         } else {
           throw new Error('네트워크 응답이 좋지 않았습니다.')
@@ -435,9 +434,7 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
         pathname.replace(/^\/+|\/+$/g, ''),
       )
       const response = await fetch(
-        `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/like/${encodeURIComponent(
-          decodedValue,
-        )}`,
+        `${apiKey}/api/like/${encodeURIComponent(decodedValue)}`,
         {
           method: 'PUT',
         },
@@ -464,33 +461,37 @@ const Toc: FunctionComponent<TocProps> = ({ headings }) => {
           top: isFixed ? '112px' : '355px',
         }}
       >
-        <Share>
-          <Heart
-            onClick={handleClick}
-            style={{
-              backgroundColor: likeStatus ? 'rgb(56, 217, 169)' : '',
-              color: likeStatus ? 'var(--button-text)' : '',
-              borderColor: likeStatus ? 'rgb(56, 217, 169)' : '',
-            }}
-          >
-            <Icon>
-              <path
-                fill="currentColor"
-                d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"
-              ></path>
-            </Icon>
-          </Heart>
-          <Like>{likeCount}</Like>
-          <ShareBtn onClick={copyToClipboard}>
-            <ShareIcon>
-              <path
-                fill="currentColor"
-                d="M5 7c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5zm11.122 12.065c-.073.301-.122.611-.122.935 0 2.209 1.791 4 4 4s4-1.791 4-4-1.791-4-4-4c-1.165 0-2.204.506-2.935 1.301l-5.488-2.927c-.23.636-.549 1.229-.943 1.764l5.488 2.927zm7.878-15.065c0-2.209-1.791-4-4-4s-4 1.791-4 4c0 .324.049.634.122.935l-5.488 2.927c.395.535.713 1.127.943 1.764l5.488-2.927c.731.795 1.77 1.301 2.935 1.301 2.209 0 4-1.791 4-4z"
-              ></path>
-            </ShareIcon>
-          </ShareBtn>
-          <ToastContainer />
-        </Share>
+        {isLoading ? (
+          <Share />
+        ) : (
+          <Share>
+            <Heart
+              onClick={handleClick}
+              style={{
+                backgroundColor: likeStatus ? 'rgb(56, 217, 169)' : '',
+                color: likeStatus ? 'var(--button-text)' : '',
+                borderColor: likeStatus ? 'rgb(56, 217, 169)' : '',
+              }}
+            >
+              <Icon>
+                <path
+                  fill="currentColor"
+                  d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"
+                ></path>
+              </Icon>
+            </Heart>
+            <Like>{likeCount}</Like>
+            <ShareBtn onClick={copyToClipboard}>
+              <ShareIcon>
+                <path
+                  fill="currentColor"
+                  d="M5 7c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5zm11.122 12.065c-.073.301-.122.611-.122.935 0 2.209 1.791 4 4 4s4-1.791 4-4-1.791-4-4-4c-1.165 0-2.204.506-2.935 1.301l-5.488-2.927c-.23.636-.549 1.229-.943 1.764l5.488 2.927zm7.878-15.065c0-2.209-1.791-4-4-4s-4 1.791-4 4c0 .324.049.634.122.935l-5.488 2.927c.395.535.713 1.127.943 1.764l5.488-2.927c.731.795 1.77 1.301 2.935 1.301 2.209 0 4-1.791 4-4z"
+                ></path>
+              </ShareIcon>
+            </ShareBtn>
+            <ToastContainer />
+          </Share>
+        )}
       </ShareWrap>
       <TocWrapper
         style={{

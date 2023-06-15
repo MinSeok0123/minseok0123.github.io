@@ -175,9 +175,12 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
 }) {
   // const goBackPage = () => window.history.back()
 
+  const [isLoading, setIsLoading] = useState(true)
   const [viewCount, setViewCount] = useState(0)
   const [likeCount, setLikeCount] = useState<number>(0)
   const [likeStatus, setLikeStatus] = useState<boolean>()
+
+  const apiKey = process.env.GATSBY_API_URL
 
   useEffect(() => {
     const fetchViewCount = async () => {
@@ -186,11 +189,8 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
         const decodedValue = decodeURIComponent(
           pathname.replace(/^\/+|\/+$/g, ''),
         )
-
         const response = await fetch(
-          `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/get_count/${encodeURIComponent(
-            decodedValue,
-          )}`,
+          `${apiKey}/api/get_count/${encodeURIComponent(decodedValue)}`,
           {
             method: 'POST',
           },
@@ -201,6 +201,7 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
           setViewCount(data.view_count)
           setLikeCount(data.like_count)
           setLikeStatus(data.liked)
+          setIsLoading(false)
         } else {
           throw new Error('네트워크 응답이 좋지 않았습니다.')
         }
@@ -219,9 +220,7 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
         pathname.replace(/^\/+|\/+$/g, ''),
       )
       const response = await fetch(
-        `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/like/${encodeURIComponent(
-          decodedValue,
-        )}`,
+        `${apiKey}/api/like/${encodeURIComponent(decodedValue)}`,
         {
           method: 'PUT',
         },
@@ -252,7 +251,7 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
           <Information>
             <Date>{date}</Date>
             <Separator>·</Separator>
-            <View>조회수: {viewCount}</View>
+            {isLoading ? <View /> : <View>조회수: {viewCount}</View>}
           </Information>
           <Like
             onClick={handleClick}
