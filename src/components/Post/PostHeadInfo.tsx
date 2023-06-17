@@ -94,6 +94,7 @@ const Like = styled.div`
     height: 1.5rem;
     border-radius: 0.75rem;
     outline: none;
+    cursor: pointer;
   }
 `
 
