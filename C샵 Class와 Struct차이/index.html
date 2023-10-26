@@ -112,18 +112,18 @@ void function() {
 <li>Struct는 값 타입(ValueType)이다. 그래서 new 키워드로 메모리를 할당 할 필요가 없다.</li>
 <li>값 타임의 경우 스텍이라는 메모리 영역에 할당 된다.</li>
 </ol>
-<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">using System<span class="token punctuation">;</span>
-using System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic<span class="token punctuation">;</span>
-using System<span class="token punctuation">.</span>Linq<span class="token punctuation">;</span>
-using System<span class="token punctuation">.</span>Text<span class="token punctuation">;</span>
-using System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Tasks<span class="token punctuation">;</span>
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Linq</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Text</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Tasks</span><span class="token punctuation">;</span>
 
-namespace StudyC
+<span class="token keyword">namespace</span> <span class="token namespace">StudyC</span>
 <span class="token punctuation">{</span>
 
     <span class="token keyword">struct</span> 할아버지
     <span class="token punctuation">{</span>
-        public <span class="token keyword">void</span> 할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> 할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"[1] 할아버지 재산"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
@@ -131,7 +131,7 @@ namespace StudyC
 
     <span class="token keyword">struct</span> 아버지
     <span class="token punctuation">{</span>
-        public <span class="token keyword">void</span> 아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> 아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"[2] 아버지 재산"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
@@ -139,15 +139,15 @@ namespace StudyC
 
     <span class="token keyword">struct</span> 아들
     <span class="token punctuation">{</span>
-        public <span class="token keyword">void</span> 아들재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> 아들재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"[3] 아들 재산"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
-    internal class Program
+    <span class="token keyword">internal</span> <span class="token keyword">class</span> <span class="token class-name">Program</span>
     <span class="token punctuation">{</span>
-        <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">Main</span><span class="token punctuation">(</span>string<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span>
+        <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> args<span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             할아버지 grandFather<span class="token punctuation">;</span> <span class="token comment">//값 타입이라서 new 키워드를 사용하지 않고 사용가능;</span>
             grandFather<span class="token punctuation">.</span>할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -168,52 +168,52 @@ namespace StudyC
 <li>Class는 참조(Reference Type)이다. 그래서 new 키워드를 사용해 메모리 할당이 필요하다.</li>
 <li>참조 타입은 힙에 할당하는 값의 주소를 가지고 있다.</li>
 </ol>
-<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">
-using System<span class="token punctuation">;</span>
-using System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic<span class="token punctuation">;</span>
-using System<span class="token punctuation">.</span>Linq<span class="token punctuation">;</span>
-using System<span class="token punctuation">.</span>Text<span class="token punctuation">;</span>
-using System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Tasks<span class="token punctuation">;</span>
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp">
+<span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Linq</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Text</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Tasks</span><span class="token punctuation">;</span>
 
-namespace StudyC
+<span class="token keyword">namespace</span> <span class="token namespace">StudyC</span>
 <span class="token punctuation">{</span>
 
-    class 할아버지
+    <span class="token keyword">class</span> 할아버지
     <span class="token punctuation">{</span>
-        public <span class="token keyword">void</span> 할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> 할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"[1] 할아버지 재산"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
-    class 아버지 <span class="token operator">:</span> 할아버지 <span class="token comment">//아버지는 할아버지의 재산을 상속받았다.</span>
+    <span class="token keyword">class</span> 아버지 <span class="token punctuation">:</span> 할아버지 <span class="token comment">//아버지는 할아버지의 재산을 상속받았다.</span>
     <span class="token punctuation">{</span>
-        public <span class="token keyword">void</span> 아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> 아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"[2] 아버지 재산"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
-    class 아들 <span class="token operator">:</span> 아버지 <span class="token comment">//아들은 아버지의 재산을 상속받았다 => (아버지는 할아버지의 재산을 상속받았기 때문에 아들을 아버지, 할아버지 둘다 재산을 상속받는다)</span>
+    <span class="token keyword">class</span> 아들 <span class="token punctuation">:</span> 아버지 <span class="token comment">//아들은 아버지의 재산을 상속받았다 => (아버지는 할아버지의 재산을 상속받았기 때문에 아들을 아버지, 할아버지 둘다 재산을 상속받는다)</span>
     <span class="token punctuation">{</span>
-        public <span class="token keyword">void</span> 아들재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> 아들재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"[3] 아들 재산"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
-    internal class Program
+    <span class="token keyword">internal</span> <span class="token keyword">class</span> <span class="token class-name">Program</span>
     <span class="token punctuation">{</span>
-        <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">Main</span><span class="token punctuation">(</span>string<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span>
+        <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> args<span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
-            할아버지 GrandFather <span class="token operator">=</span> new 할아버지<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//new 키워드를 이용해 메모리에 할당함;</span>
+            할아버지 GrandFather <span class="token operator">=</span> <span class="token keyword">new</span> 할아버지<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//new 키워드를 이용해 메모리에 할당함;</span>
             GrandFather<span class="token punctuation">.</span>할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            아버지 Father <span class="token operator">=</span> new 아버지<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//new 키워드를 이용해 메모리에 할당함;</span>
+            아버지 Father <span class="token operator">=</span> <span class="token keyword">new</span> 아버지<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//new 키워드를 이용해 메모리에 할당함;</span>
             Father<span class="token punctuation">.</span>아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             Father<span class="token punctuation">.</span>할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">//할아버지 재산을 상속받아서 할아버지재산에 접근할 수 있다.</span>
 
-            아들 son <span class="token operator">=</span> new 아들<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//new 키워드를 이용해 메모리에 할당함;</span>
+            아들 son <span class="token operator">=</span> <span class="token keyword">new</span> 아들<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//new 키워드를 이용해 메모리에 할당함;</span>
             son<span class="token punctuation">.</span>아들재산<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             son<span class="token punctuation">.</span>아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//아버지 재산을 상속받아서 아버지재산에 접근할 수 있다.</span>
             son<span class="token punctuation">.</span>할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//아버지 재산에 할아버지 재산이 포함되어 있기 때문에 할아버지 재산에도 접근이 가능하다.</span>
@@ -229,9 +229,9 @@ namespace StudyC
 각 캐릭터에 상속을 시켜주면 공통능력치를 다 줄수있다.</p>
 </blockquote>
 <h3 id="class에서-상속을-금지하는-방법" style="position:relative;">class에서 상속을 금지하는 방법<a href="#class%EC%97%90%EC%84%9C-%EC%83%81%EC%86%8D%EC%9D%84-%EA%B8%88%EC%A7%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95" aria-label="class에서 상속을 금지하는 방법 permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h3>
-<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">    sealed class 할아버지
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp">    <span class="token keyword">sealed</span> <span class="token keyword">class</span> 할아버지
     <span class="token punctuation">{</span>
-        public <span class="token keyword">void</span> 할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> 할아버지재산<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"[1] 할아버지 재산"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
