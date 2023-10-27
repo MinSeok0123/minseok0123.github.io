@@ -1,12 +1,12 @@
 ---
 date: '2023-10-26'
 title: 'C# Class와 Struct차이'
-categories: ['C#']
+categories: ['C샵']
 summary: '기존 C 언어에서는 Class 구분이 없이 Struct를 사용해서 기존 C와 호환성을 위해 Struct를 사용한다.'
 thumbnail: './StructvsClass.png'
 ---
 
-# CClass와 Struct차이
+# Class와 Struct차이
 
 ### 사용하는 이유!
 
@@ -18,7 +18,7 @@ thumbnail: './StructvsClass.png'
 2. Struct는 값 타입(ValueType)이다. 그래서 new 키워드로 메모리를 할당 할 필요가 없다.
 3. 값 타임의 경우 스텍이라는 메모리 영역에 할당 된다.
 
-```c
+```csharp
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +78,7 @@ namespace StudyC
 2. Class는 참조(Reference Type)이다. 그래서 new 키워드를 사용해 메모리 할당이 필요하다.
 3. 참조 타입은 힙에 할당하는 값의 주소를 가지고 있다.
 
-```c
+```csharp
 
 using System;
 using System.Collections.Generic;
@@ -143,7 +143,7 @@ namespace StudyC
 
 ### class에서 상속을 금지하는 방법
 
-```c
+```csharp
     sealed class 할아버지
     {
         public void 할아버지재산()
