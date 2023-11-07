@@ -116,66 +116,66 @@ void function() {
 <p><img src="https://velog.velcdn.com/images/minseok0123/post/6d4ce393-be97-4756-b243-257999d1fd85/image.png" alt=""></p>
 <h1 id="2-Code-Java" style="position:relative;">2. Code (Java)<a href="#2-Code-Java" aria-label="2 Code Java permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h1>
 <h2 id="ArrayList-1" style="position:relative;">ArrayList<a href="#ArrayList-1" aria-label="ArrayList 1 permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">import java.util.ArrayList;
+<div class="gatsby-highlight" data-language="java"><pre class="language-java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span>
 
-public class ArrayListExample {
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ArrayListExample</span> <span class="token punctuation">{</span>
 
-    public static void main(String[] args) {
-        // ArrayList 생성
-        ArrayList&lt;String> names = new ArrayList&lt;>();
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ArrayList 생성</span>
+        <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> names <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 요소 추가
-        names.add("Mcdonald");
-        names.add("BugerKing");
-        names.add("LotteRia");
+        <span class="token comment">// 요소 추가</span>
+        names<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"Mcdonald"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        names<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"BugerKing"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        names<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"LotteRia"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 요소 접근
-        System.out.println(names.get(0)); // 출력: Mcdonald
+        <span class="token comment">// 요소 접근</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>names<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 출력: Mcdonald</span>
 
-        // 요소 수정
-        names.set(1, "Shack Shack");
+        <span class="token comment">// 요소 수정</span>
+        names<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Shack Shack"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 요소 제거
-        names.remove(2);
+        <span class="token comment">// 요소 제거</span>
+        names<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 전체 출력
-        for (String name : names) {
-            System.out.println(name);
-        }
-    }
+        <span class="token comment">// 전체 출력</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> name <span class="token operator">:</span> names<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-}
+<span class="token punctuation">}</span>
 </code></pre></div>
 <h2 id="HashMapp" style="position:relative;">HashMapp<a href="#HashMapp" aria-label="HashMapp permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">import java.util.HashMap;
+<div class="gatsby-highlight" data-language="java"><pre class="language-java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">HashMap</span></span><span class="token punctuation">;</span>
 
-public class HashMapExample {
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HashMapExample</span> <span class="token punctuation">{</span>
 
-    public static void main(String[] args) {
-        // HashMap 생성
-        HashMap&lt;String, Integer> ages = new HashMap&lt;>();
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// HashMap 생성</span>
+        <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> ages <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 요소 추가
-        ages.put("Mcdonald", 82);
-        ages.put("BugerKing", 69);
-        ages.put("LotteRia", 43);
+        <span class="token comment">// 요소 추가</span>
+        ages<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"Mcdonald"</span><span class="token punctuation">,</span> <span class="token number">82</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ages<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"BugerKing"</span><span class="token punctuation">,</span> <span class="token number">69</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ages<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"LotteRia"</span><span class="token punctuation">,</span> <span class="token number">43</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 요소 접근
-        System.out.println(ages.get("BugerKing")); // 출력: 69
+        <span class="token comment">// 요소 접근</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>ages<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"BugerKing"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 출력: 69</span>
 
-        // 요소 수정
-        ages.replace("LotteRia", 44);
+        <span class="token comment">// 요소 수정</span>
+        ages<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"LotteRia"</span><span class="token punctuation">,</span> <span class="token number">44</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 요소 제거
-        ages.remove("Mcdonald");
+        <span class="token comment">// 요소 제거</span>
+        ages<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">"Mcdonald"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 전체 출력
-        for (String name : ages.keySet()) {
-            System.out.println(name + ": " + ages.get(name));
-        }
-    }
+        <span class="token comment">// 전체 출력</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> name <span class="token operator">:</span> ages<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name <span class="token operator">+</span> <span class="token string">": "</span> <span class="token operator">+</span> ages<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-}
+<span class="token punctuation">}</span>
 </code></pre></div></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css 9w9jmx">.css-9w9jmx{display:grid;place-items:center;margin-top:auto;padding:50px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-9w9jmx{font-size:13px;}}</style><footer class="css-9w9jmx e1oae0v81"><span>© 2023 <style data-emotion="css foezf1">.css-foezf1{color:#3a95ff;}</style><a href="https://github.com/MinSeok0123" class="css-foezf1 e1oae0v80">Minseok</a> powered by <a href="https://github.com/MinSeok0123/minseok0123.github.io" class="css-foezf1 e1oae0v80">minlog</a></span></footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/Java Collection Framework에 대해 알아보자/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
           <script
             id="gatsby-chunk-mapping"

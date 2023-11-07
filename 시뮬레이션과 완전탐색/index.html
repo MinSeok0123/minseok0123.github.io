@@ -126,33 +126,33 @@ void function() {
 <p>이때 여행가 A가 N × N 크기의 정사각형 공간을 벗어나는 움직임은 무시된다예를 들어 (1, 1)의 위치에서 L 혹은 U를 만나면 무시된다다음은 N = 5인 지도와 계획이다.</p>
 <p><img src="https://velog.velcdn.com/images/minseok0123/post/0cda2031-eff7-40d9-83d2-ed69060b26de/image.png" alt=""></p>
 <h2 id="코드" style="position:relative;">코드<a href="#%EC%BD%94%EB%93%9C" aria-label="코드 permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">n = int(input())  # 정사각형 공간을 입력받는다.
-x, y = 1, 1  # 시작 좌표는 항상 (1, 1)이므로 1, 1로 x, y 초기화
-plans = input().split() # 이동 계획을 입력받는다.
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python">n <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 정사각형 공간을 입력받는다.</span>
+x<span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span>  <span class="token comment"># 시작 좌표는 항상 (1, 1)이므로 1, 1로 x, y 초기화</span>
+plans <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 이동 계획을 입력받는다.</span>
 
-# 상하좌우(L, R, U, D)에 따른 이동 방향
-dx = [0, 0, -1, 1]
-dy = [-1, 1, 0, 0]
+<span class="token comment"># 상하좌우(L, R, U, D)에 따른 이동 방향</span>
+dx <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+dy <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span>
 
-move_types = ['L', 'R', 'U', 'D']
+move_types <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'L'</span><span class="token punctuation">,</span> <span class="token string">'R'</span><span class="token punctuation">,</span> <span class="token string">'U'</span><span class="token punctuation">,</span> <span class="token string">'D'</span><span class="token punctuation">]</span>
 
-# 입력받은 이동 계획을 하나씩 조회
-for plan in plans:
-    for i in range(len(move_types)):
-    	# move_types와 일치하는 plan이 있다면
-        if plan == move_types[i]:
-        # 이동한 A의 좌표 nx, ny
-            nx = x + dx[i]
-            ny = y + dy[i]
+<span class="token comment"># 입력받은 이동 계획을 하나씩 조회</span>
+<span class="token keyword">for</span> plan <span class="token keyword">in</span> plans<span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>move_types<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    	<span class="token comment"># move_types와 일치하는 plan이 있다면</span>
+        <span class="token keyword">if</span> plan <span class="token operator">==</span> move_types<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token comment"># 이동한 A의 좌표 nx, ny</span>
+            nx <span class="token operator">=</span> x <span class="token operator">+</span> dx<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            ny <span class="token operator">=</span> y <span class="token operator">+</span> dy<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
 
-    # N x N 크기의 정사각형을 벗어나면 움직임은 무시되므로
-    if nx &lt; 1 or ny &lt; 1 or nx > n or ny > n:
-        continue
+    <span class="token comment"># N x N 크기의 정사각형을 벗어나면 움직임은 무시되므로</span>
+    <span class="token keyword">if</span> nx <span class="token operator">&lt;</span> <span class="token number">1</span> <span class="token keyword">or</span> ny <span class="token operator">&lt;</span> <span class="token number">1</span> <span class="token keyword">or</span> nx <span class="token operator">></span> n <span class="token keyword">or</span> ny <span class="token operator">></span> n<span class="token punctuation">:</span>
+        <span class="token keyword">continue</span>
 
-    #  공간안에 있다면 A의 좌표 이동
-    x, y = nx, ny
+    <span class="token comment">#  공간안에 있다면 A의 좌표 이동</span>
+    x<span class="token punctuation">,</span> y <span class="token operator">=</span> nx<span class="token punctuation">,</span> ny
 
-print(x, y)</code></pre></div>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span></code></pre></div>
 <ol>
 <li>입력으로 정사각형 공간의 크기 N을 받습니다.</li>
 <li>A의 초기 위치를 (1, 1)로 설정합니다.</li>

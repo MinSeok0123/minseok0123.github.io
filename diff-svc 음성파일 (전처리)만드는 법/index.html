@@ -107,84 +107,84 @@ void function() {
 <p>이번 포스트에서는 Python 라이브러리인 PyDub을 사용하여 음성 파일을 전처리하는 방법을 알아보겠습니다. PyDub은 오디오 파일의 다양한 처리 작업을 수행할 수 있는 라이브러리로, 간단한 API와 함께 사용하기 쉽습니다. 이번 포스트에서는 PyDub을 사용하여 음성 파일을 무음 구간을 기준으로 분리하고, 분리된 오디오 조각들을 최대 15초까지만 선택하여 WAV 파일로 저장하고, 마지막으로 무음을 제거하는 작업을 수행하는 코드를 살펴보겠습니다.</p>
 <h3 id="들어가기에-앞서-아래코드는-pydub-라이브러리가-필요합니다" style="position:relative;">들어가기에 앞서 아래코드는 pydub 라이브러리가 필요합니다.<a href="#%EB%93%A4%EC%96%B4%EA%B0%80%EA%B8%B0%EC%97%90-%EC%95%9E%EC%84%9C-%EC%95%84%EB%9E%98%EC%BD%94%EB%93%9C%EB%8A%94-pydub-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%A9%EB%8B%88%EB%8B%A4" aria-label="들어가기에 앞서 아래코드는 pydub 라이브러리가 필요합니다 permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h3>
 <p>파이썬 2.7, 3.3 이상의 버전에서 사용 가능합니다. pydub를 설치하려면 pip를 사용합니다.</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">pip install pydub
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python">pip install pydub
 </code></pre></div>
 <h2 id="코드" style="position:relative;">코드<a href="#%EC%BD%94%EB%93%9C" aria-label="코드 permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2>
 <p>먼저 필요한 라이브러리를 import합니다.</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">from pydub import AudioSegment
-from pydub.silence import split_on_silence
-import os
-import subprocess
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> pydub <span class="token keyword">import</span> AudioSegment
+<span class="token keyword">from</span> pydub<span class="token punctuation">.</span>silence <span class="token keyword">import</span> split_on_silence
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> subprocess
 </code></pre></div>
 <p>다음으로, 입력 파일 경로와 출력 폴더를 설정합니다.</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">input_file = 'input_file.mp3'
-output_folder = 'output_folder'
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python">input_file <span class="token operator">=</span> <span class="token string">'input_file.mp3'</span>
+output_folder <span class="token operator">=</span> <span class="token string">'output_folder'</span>
 </code></pre></div>
 <p>이제, 입력 파일을 PyDub으로 로드하고, 샘플링 레이트, 채널, 샘플 넓이를 설정합니다.</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">sound = AudioSegment.from_file(input_file)
-sound = sound.set_frame_rate(44100).set_channels(1).set_sample_width(2)
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python">sound <span class="token operator">=</span> AudioSegment<span class="token punctuation">.</span>from_file<span class="token punctuation">(</span>input_file<span class="token punctuation">)</span>
+sound <span class="token operator">=</span> sound<span class="token punctuation">.</span>set_frame_rate<span class="token punctuation">(</span><span class="token number">44100</span><span class="token punctuation">)</span><span class="token punctuation">.</span>set_channels<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>set_sample_width<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
 </code></pre></div>
 <p>이제, PyDub의 split_on_silence() 함수를 사용하여 입력된 음성 파일을 무음을 기준으로 자동으로 분리합니다. 이 함수는 최소 무음 길이, 무음으로 간주되는 dBFS 값, 분리된 각 음성 조각들 간의 추가적인 무음 길이를 인자로 받습니다.</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">audio_chunks = split_on_silence(sound,
-    min_silence_len=1000, # 최소 무음 길이 (밀리초 단위)
-    silence_thresh=-35, # 무음으로 간주되는 dBFS 값
-    keep_silence=500 # 분리된 오디오 조각들 간의 추가적인 무음 길이 (밀리초 단위)
-)
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python">audio_chunks <span class="token operator">=</span> split_on_silence<span class="token punctuation">(</span>sound<span class="token punctuation">,</span>
+    min_silence_len<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token comment"># 최소 무음 길이 (밀리초 단위)</span>
+    silence_thresh<span class="token operator">=</span><span class="token operator">-</span><span class="token number">35</span><span class="token punctuation">,</span> <span class="token comment"># 무음으로 간주되는 dBFS 값</span>
+    keep_silence<span class="token operator">=</span><span class="token number">500</span> <span class="token comment"># 분리된 오디오 조각들 간의 추가적인 무음 길이 (밀리초 단위)</span>
+<span class="token punctuation">)</span>
 </code></pre></div>
 <p>분리된 음성 조각들 중 최대 15초까지만 선택하여 WAV 파일로 저장합니다.
 이 작업은 각 음성의 길이가 너무 긴 경우 파일 크기가 너무 커지는 것을 방지하기 위한 것입니다.</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">for i, chunk in enumerate(audio_chunks):
-    if len(chunk) > 15000:
-        chunk = chunk[:15000]
-    output_file = os.path.join(output_folder, f'chunk_{i}.wav')
-    chunk.export(output_file, format='wav')
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token keyword">for</span> i<span class="token punctuation">,</span> chunk <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>audio_chunks<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>chunk<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">15000</span><span class="token punctuation">:</span>
+        chunk <span class="token operator">=</span> chunk<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">15000</span><span class="token punctuation">]</span>
+    output_file <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>output_folder<span class="token punctuation">,</span> <span class="token string-interpolation"><span class="token string">f'chunk_</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">.wav'</span></span><span class="token punctuation">)</span>
+    chunk<span class="token punctuation">.</span>export<span class="token punctuation">(</span>output_file<span class="token punctuation">,</span> <span class="token builtin">format</span><span class="token operator">=</span><span class="token string">'wav'</span><span class="token punctuation">)</span>
 </code></pre></div>
 <p>마지막으로 무음제거 코드입니다.</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">for filename in os.listdir(output_folder):
-    if filename.endswith('.wav'):
-        input_path = os.path.join(output_folder, filename)
-        output_path = os.path.join(output_folder, f'processed_{filename}')
-        subprocess.call(['ffmpeg', '-i', input_path, '-af', 'silenceremove=1:0:-50dB', '-y', output_path])
-        os.remove(input_path)</code></pre></div>
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token keyword">for</span> filename <span class="token keyword">in</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>output_folder<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> filename<span class="token punctuation">.</span>endswith<span class="token punctuation">(</span><span class="token string">'.wav'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        input_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>output_folder<span class="token punctuation">,</span> filename<span class="token punctuation">)</span>
+        output_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>output_folder<span class="token punctuation">,</span> <span class="token string-interpolation"><span class="token string">f'processed_</span><span class="token interpolation"><span class="token punctuation">{</span>filename<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+        subprocess<span class="token punctuation">.</span>call<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'ffmpeg'</span><span class="token punctuation">,</span> <span class="token string">'-i'</span><span class="token punctuation">,</span> input_path<span class="token punctuation">,</span> <span class="token string">'-af'</span><span class="token punctuation">,</span> <span class="token string">'silenceremove=1:0:-50dB'</span><span class="token punctuation">,</span> <span class="token string">'-y'</span><span class="token punctuation">,</span> output_path<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        os<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>input_path<span class="token punctuation">)</span></code></pre></div>
 <h1 id="전체코드" style="position:relative;">전체코드<a href="#%EC%A0%84%EC%B2%B4%EC%BD%94%EB%93%9C" aria-label="전체코드 permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h1>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">from pydub import AudioSegment
-from pydub.silence import split_on_silence
-import os
-import subprocess
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> pydub <span class="token keyword">import</span> AudioSegment
+<span class="token keyword">from</span> pydub<span class="token punctuation">.</span>silence <span class="token keyword">import</span> split_on_silence
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> subprocess
 
-# 음성파일 경로 설정
-input_file = 'input_file.mp3'
-output_folder = 'output_folder'
+<span class="token comment"># 음성파일 경로 설정</span>
+input_file <span class="token operator">=</span> <span class="token string">'input_file.mp3'</span>
+output_folder <span class="token operator">=</span> <span class="token string">'output_folder'</span>
 
-# 오디오 파일 로드 및 변환
-sound = AudioSegment.from_file(input_file)
-sound = sound.set_frame_rate(44100).set_channels(1).set_sample_width(2)
+<span class="token comment"># 오디오 파일 로드 및 변환</span>
+sound <span class="token operator">=</span> AudioSegment<span class="token punctuation">.</span>from_file<span class="token punctuation">(</span>input_file<span class="token punctuation">)</span>
+sound <span class="token operator">=</span> sound<span class="token punctuation">.</span>set_frame_rate<span class="token punctuation">(</span><span class="token number">44100</span><span class="token punctuation">)</span><span class="token punctuation">.</span>set_channels<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>set_sample_width<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
 
-# 무음 구간을 기준으로 오디오 파일 분리
-audio_chunks = split_on_silence(sound,
-    min_silence_len=1000, # 최소 무음 길이 (밀리초 단위)
-    silence_thresh=-35, # 무음으로 간주되는 dBFS 값
-    keep_silence=500 # 분리된 오디오 조각들 간의 추가적인 무음 길이 (밀리초 단위)
-)
+<span class="token comment"># 무음 구간을 기준으로 오디오 파일 분리</span>
+audio_chunks <span class="token operator">=</span> split_on_silence<span class="token punctuation">(</span>sound<span class="token punctuation">,</span>
+    min_silence_len<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token comment"># 최소 무음 길이 (밀리초 단위)</span>
+    silence_thresh<span class="token operator">=</span><span class="token operator">-</span><span class="token number">35</span><span class="token punctuation">,</span> <span class="token comment"># 무음으로 간주되는 dBFS 값</span>
+    keep_silence<span class="token operator">=</span><span class="token number">500</span> <span class="token comment"># 분리된 오디오 조각들 간의 추가적인 무음 길이 (밀리초 단위)</span>
+<span class="token punctuation">)</span>
 
-# 출력 파일명 설정 및 출력 폴더 생성
-if not os.path.exists(output_folder):
-    os.makedirs(output_folder)
+<span class="token comment"># 출력 파일명 설정 및 출력 폴더 생성</span>
+<span class="token keyword">if</span> <span class="token keyword">not</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>exists<span class="token punctuation">(</span>output_folder<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    os<span class="token punctuation">.</span>makedirs<span class="token punctuation">(</span>output_folder<span class="token punctuation">)</span>
 
-# 분리된 오디오 조각들 중 최대 15초까지만 선택하여 wav 파일로 저장
-for i, chunk in enumerate(audio_chunks):
-    if len(chunk) > 15000:
-        chunk = chunk[:15000]
-    output_file = os.path.join(output_folder, f'chunk_{i}.wav')
-    chunk.export(output_file, format='wav')
+<span class="token comment"># 분리된 오디오 조각들 중 최대 15초까지만 선택하여 wav 파일로 저장</span>
+<span class="token keyword">for</span> i<span class="token punctuation">,</span> chunk <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>audio_chunks<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>chunk<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">15000</span><span class="token punctuation">:</span>
+        chunk <span class="token operator">=</span> chunk<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">15000</span><span class="token punctuation">]</span>
+    output_file <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>output_folder<span class="token punctuation">,</span> <span class="token string-interpolation"><span class="token string">f'chunk_</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">.wav'</span></span><span class="token punctuation">)</span>
+    chunk<span class="token punctuation">.</span>export<span class="token punctuation">(</span>output_file<span class="token punctuation">,</span> <span class="token builtin">format</span><span class="token operator">=</span><span class="token string">'wav'</span><span class="token punctuation">)</span>
 
-# 무음 제거
-for filename in os.listdir(output_folder):
-    if filename.endswith('.wav'):
-        input_path = os.path.join(output_folder, filename)
-        output_path = os.path.join(output_folder, f'processed_{filename}')
-        subprocess.call(['ffmpeg', '-i', input_path, '-af', 'silenceremove=1:0:-50dB', '-y', output_path])
-        os.remove(input_path)
+<span class="token comment"># 무음 제거</span>
+<span class="token keyword">for</span> filename <span class="token keyword">in</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>output_folder<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> filename<span class="token punctuation">.</span>endswith<span class="token punctuation">(</span><span class="token string">'.wav'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        input_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>output_folder<span class="token punctuation">,</span> filename<span class="token punctuation">)</span>
+        output_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>output_folder<span class="token punctuation">,</span> <span class="token string-interpolation"><span class="token string">f'processed_</span><span class="token interpolation"><span class="token punctuation">{</span>filename<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+        subprocess<span class="token punctuation">.</span>call<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'ffmpeg'</span><span class="token punctuation">,</span> <span class="token string">'-i'</span><span class="token punctuation">,</span> input_path<span class="token punctuation">,</span> <span class="token string">'-af'</span><span class="token punctuation">,</span> <span class="token string">'silenceremove=1:0:-50dB'</span><span class="token punctuation">,</span> <span class="token string">'-y'</span><span class="token punctuation">,</span> output_path<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        os<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>input_path<span class="token punctuation">)</span>
 </code></pre></div></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css 9w9jmx">.css-9w9jmx{display:grid;place-items:center;margin-top:auto;padding:50px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-9w9jmx{font-size:13px;}}</style><footer class="css-9w9jmx e1oae0v81"><span>© 2023 <style data-emotion="css foezf1">.css-foezf1{color:#3a95ff;}</style><a href="https://github.com/MinSeok0123" class="css-foezf1 e1oae0v80">Minseok</a> powered by <a href="https://github.com/MinSeok0123/minseok0123.github.io" class="css-foezf1 e1oae0v80">minlog</a></span></footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/diff-svc 음성파일 (전처리)만드는 법/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
           <script
             id="gatsby-chunk-mapping"

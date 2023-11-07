@@ -261,20 +261,20 @@ n <span class="token operator">=</span> <span class="token number">99</span>
 <ul>
 <li>메모이제이션을 이용하는 경우 피보나치 수열 함수의 시간 복잡도는 O(N)</li>
 </ul>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">d = [0] * 100
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python">d <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">100</span>
 
-def fibo(x):
-    print('f(' + str(x) + ')', end=' ')
-    if x == 1 or x == 2:
-        return 1
-    if d[x] != 0:
-        return d[x]
-    d[x] = fibo(x - 1) + fibo(x - 2)
-    return d[x]
+<span class="token keyword">def</span> <span class="token function">fibo</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'f('</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">')'</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">' '</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token number">1</span> <span class="token keyword">or</span> x <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token number">1</span>
+    <span class="token keyword">if</span> d<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> d<span class="token punctuation">[</span>x<span class="token punctuation">]</span>
+    d<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">=</span> fibo<span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> fibo<span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> d<span class="token punctuation">[</span>x<span class="token punctuation">]</span>
 
-fibo(6)
+fibo<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span>
 
->>>> f(6) f(5) f(4) f(3) f(2) f(1) f(2) f(3) f(4)</code></pre></div>
+<span class="token operator">>></span><span class="token operator">>></span> f<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> f<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> f<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> f<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> f<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> f<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> f<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> f<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> f<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span></code></pre></div>
 <h3 id="다이나믹-프로그래밍-vs-분할-정복" style="position:relative;">다이나믹 프로그래밍 vs 분할 정복<a href="#%EB%8B%A4%EC%9D%B4%EB%82%98%EB%AF%B9-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-vs-%EB%B6%84%ED%95%A0-%EC%A0%95%EB%B3%B5" aria-label="다이나믹 프로그래밍 vs 분할 정복 permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h3>
 <ul>
 <li><strong>다이나믹 프로그래밍</strong>과 <strong>분할 정복</strong>은 <strong>모두 최적 부분 구조를 가질 때 사용 가능</strong>

@@ -131,39 +131,39 @@ void function() {
 <p>거스름 돈이 N원일 때, <code class="language-text">500원</code>으로 최대한 많이 거슬러주고, 순서대로 <code class="language-text">100원</code>, <code class="language-text">50원</code>, <code class="language-text">10원</code>을 써서 거슬러주면 됩니다.</p>
 <p>이제 N이 1,260 일 때의 예시를 확인해봅시다.</p>
 <h1 id="코드" style="position:relative;">코드<a href="#%EC%BD%94%EB%93%9C" aria-label="코드 permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h1>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">#include &lt;stdio.h>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
-void giveChange(int amount) {
-    int coins[] = {500, 100, 50, 10};  // 동전 종류
-    int numCoins = sizeof(coins) / sizeof(coins[0]);  // 동전 종류의 개수
-    int count[numCoins];  // 동전 개수를 저장할 배열
+<span class="token keyword">void</span> <span class="token function">giveChange</span><span class="token punctuation">(</span><span class="token keyword">int</span> amount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> coins<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">500</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment">// 동전 종류</span>
+    <span class="token keyword">int</span> numCoins <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>coins<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>coins<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 동전 종류의 개수</span>
+    <span class="token keyword">int</span> count<span class="token punctuation">[</span>numCoins<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// 동전 개수를 저장할 배열</span>
 
-    // 각 동전의 개수 초기화
-    for (int i = 0; i &lt; numCoins; i++) {
-        count[i] = 0;
-    }
+    <span class="token comment">// 각 동전의 개수 초기화</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> numCoins<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        count<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 가장 큰 동전부터 시작하여 거스름돈 주기
-    for (int i = 0; i &lt; numCoins; i++) {
-        while (amount >= coins[i]) {
-            amount -= coins[i];
-            count[i]++;
-        }
-    }
+    <span class="token comment">// 가장 큰 동전부터 시작하여 거스름돈 주기</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> numCoins<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>amount <span class="token operator">>=</span> coins<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            amount <span class="token operator">-=</span> coins<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            count<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    // 거스름돈 출력
-    for (int i = 0; i &lt; numCoins; i++) {
-        if (count[i] > 0) {
-            printf("%d원 동전: %d개\n", coins[i], count[i]);
-        }
-    }
-}
+    <span class="token comment">// 거스름돈 출력</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> numCoins<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>count<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d원 동전: %d개\n"</span><span class="token punctuation">,</span> coins<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> count<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-int main() {
-    int amount = 1260;  // 거스름돈 금액
-    giveChange(amount);
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> amount <span class="token operator">=</span> <span class="token number">1260</span><span class="token punctuation">;</span>  <span class="token comment">// 거스름돈 금액</span>
+    <span class="token function">giveChange</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre></div>
 <h1 id="정당성-분석" style="position:relative;">정당성 분석<a href="#%EC%A0%95%EB%8B%B9%EC%84%B1-%EB%B6%84%EC%84%9D" aria-label="정당성 분석 permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h1>
 <p>가장 큰 화폐 단위부터 돈을 거슬러 주는 것이 최적의 해를 보장하는 이유는 무엇일까요?</p>
