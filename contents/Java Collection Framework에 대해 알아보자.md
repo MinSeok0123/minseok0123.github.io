@@ -35,7 +35,7 @@ HashMap은 내부적으로 해시 테이블을 사용하여 요소를 저장한�
 # 2. Code (Java)
 
 ## ArrayList
-```
+```java
 import java.util.ArrayList;
 
 public class ArrayListExample {
@@ -70,7 +70,7 @@ public class ArrayListExample {
 
 
 ## HashMapp
-```
+```java
 import java.util.HashMap;
 
 public class HashMapExample {

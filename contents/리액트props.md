@@ -22,7 +22,7 @@ thumbnail: './image/1.png'
 
 _부모 컴포넌트_
 
-```
+```js
 import React from 'react';
 import ChildComponent from './ChildComponent';
 
@@ -40,7 +40,7 @@ export default ParentComponent;
 
 _자식 컴포넌트_
 
-```
+```js
 import React from 'react';
 
 function ChildComponent(props) {
@@ -65,7 +65,7 @@ export default ChildComponent;
 
 _부모 컴포넌트_
 
-```
+```js
 import React, { useState } from 'react';
 import ChildComponent from './ChildComponent';
 
@@ -90,7 +90,7 @@ export default ParentComponent;
 
 _자식 컴포넌트_
 
-```
+```js
 import React, { useState } from 'react';
 
 function ChildComponent(props) {

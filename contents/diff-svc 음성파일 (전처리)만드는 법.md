@@ -18,7 +18,7 @@ thumbnail: './image/diffsvc.png'
 
 파이썬 2.7, 3.3 이상의 버전에서 사용 가능합니다. pydub를 설치하려면 pip를 사용합니다.
 
-```
+```python
 pip install pydub
 
 ```
@@ -27,7 +27,7 @@ pip install pydub
 
 먼저 필요한 라이브러리를 import합니다.
 
-```
+```python
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 import os
@@ -37,7 +37,7 @@ import subprocess
 
 다음으로, 입력 파일 경로와 출력 폴더를 설정합니다.
 
-```
+```python
 input_file = 'input_file.mp3'
 output_folder = 'output_folder'
 
@@ -45,7 +45,7 @@ output_folder = 'output_folder'
 
 이제, 입력 파일을 PyDub으로 로드하고, 샘플링 레이트, 채널, 샘플 넓이를 설정합니다.
 
-```
+```python
 sound = AudioSegment.from_file(input_file)
 sound = sound.set_frame_rate(44100).set_channels(1).set_sample_width(2)
 
@@ -53,7 +53,7 @@ sound = sound.set_frame_rate(44100).set_channels(1).set_sample_width(2)
 
 이제, PyDub의 split_on_silence() 함수를 사용하여 입력된 음성 파일을 무음을 기준으로 자동으로 분리합니다. 이 함수는 최소 무음 길이, 무음으로 간주되는 dBFS 값, 분리된 각 음성 조각들 간의 추가적인 무음 길이를 인자로 받습니다.
 
-```
+```python
 audio_chunks = split_on_silence(sound,
     min_silence_len=1000, # 최소 무음 길이 (밀리초 단위)
     silence_thresh=-35, # 무음으로 간주되는 dBFS 값
@@ -65,7 +65,7 @@ audio_chunks = split_on_silence(sound,
 분리된 음성 조각들 중 최대 15초까지만 선택하여 WAV 파일로 저장합니다.
 이 작업은 각 음성의 길이가 너무 긴 경우 파일 크기가 너무 커지는 것을 방지하기 위한 것입니다.
 
-```
+```python
 for i, chunk in enumerate(audio_chunks):
     if len(chunk) > 15000:
         chunk = chunk[:15000]
@@ -76,7 +76,7 @@ for i, chunk in enumerate(audio_chunks):
 
 마지막으로 무음제거 코드입니다.
 
-```
+```python
 for filename in os.listdir(output_folder):
     if filename.endswith('.wav'):
         input_path = os.path.join(output_folder, filename)
@@ -87,7 +87,7 @@ for filename in os.listdir(output_folder):
 
 # 전체코드
 
-```
+```python
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 import os
