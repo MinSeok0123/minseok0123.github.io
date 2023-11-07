@@ -3,7 +3,7 @@ date: '2023-10-30'
 title: 'private, public, protected 접근제어'
 categories: ['C샵']
 summary: '1. public : 다른 클래스에서도 접근 가능 2. private : 그 맴버를 선언한 클래스 내부에서만 접근 가능 3. protected : 그 멤버를 선언한 클래스 + 그걸 상속받은 자식 클래스 내부에서만 접근 가능'
-thumbnail: './public.png'
+thumbnail: './image/public.png'
 ---
 
 # private, public, protected 접근제어

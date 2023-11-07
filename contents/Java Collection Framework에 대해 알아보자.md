@@ -3,7 +3,7 @@ date: '2023-03-29'
 title: 'Java Collection Framework에 대해 알아보자'
 categories: ['Java']
 summary: 'Java Collection Framework는 자바에서 제공하는 데이터 구조와 관련된 클래스와 인터페이스의 집합이다. 이것은 다양한 자료구조의 구현을 제공하고, 컬렉션 클래스를 사용하여 데이터를 저장, 검색, 정렬, 삭제 등 다양한 연산을 수행할 수 있다. 여기서는 컬렉션 프레임워크의 중요한 두 가지 클래스인 ArrayList와 HashMap에 대해 알아보겠다.'
-thumbnail: './java.png'
+thumbnail: './image/java.png'
 ---
 
 # Java Collection Framework

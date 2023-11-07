@@ -3,7 +3,7 @@ date: '2023-05-15'
 title: 'DFS와 BFS'
 categories: ['알고리즘', 'Python']
 summary: '루트 노드(혹은 다른 임의의 노드)에서 시작해서 다음 분기(branch)로 넘어가기 전에 해당 분기를 완벽하게 탐색하고 넘어가는 방법.넓게(wide) 탐색하기 전에 깊게(deep) 탐색한다.모든 노드를 방문 하고자 하는 경우에 이 방법을 사용한다.'
-thumbnail: './DFS AND BFS.png'
+thumbnail: './image/DFS AND BFS.png'
 ---
 
 # DFS

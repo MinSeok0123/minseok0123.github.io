@@ -5,7 +5,7 @@ categories: ['C샵']
 summary: '1. 생성자
 생성자 함수는 메모리가 생성된 직후 가장 먼저 호출되는 함수이다.
 모든 class는 메모리가 생성될 경우 자신과 이름이 똑같은 함수를 가장 먼저 호출한다.'
-thumbnail: './생성자.png'
+thumbnail: './image/생성자.png'
 ---
 
 # 생성자와 static 변수

@@ -5,7 +5,7 @@ categories: ['C샵']
 summary: '하나의 이름으로 여러 개의 함수를 만드는 기법
 [오버로딩(Over loading)을 사용하는 이유]
 함수의 이름 하나로 여러 가지 작업에 대처할 수 있다.'
-thumbnail: './overload.png'
+thumbnail: './image/overload.png'
 ---
 
 

@@ -4,7 +4,7 @@ title: 'static 접근방식 변수, 함수, 생성자'
 categories: ['C샵']
 summary: '일반 맴버 변수는 객체를 생성해야지만 메모리가 생성된다. (별도로 메모리를 할당해야 접근가능)
 하지만 스태틱 변수는 객체 생성 이전에 접근할 수 있다. (프로그램 시작과 동시에 가장 먼저 할당)'
-thumbnail: './static.png'
+thumbnail: './image/static.png'
 ---
 
 # static 접근방식 변수, 함수, 생성자

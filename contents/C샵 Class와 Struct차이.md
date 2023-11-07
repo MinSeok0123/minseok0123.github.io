@@ -3,7 +3,7 @@ date: '2023-10-26'
 title: 'C# Class와 Struct차이'
 categories: ['C샵']
 summary: '기존 C 언어에서는 Class 구분이 없이 Struct를 사용해서 기존 C와 호환성을 위해 Struct를 사용한다.'
-thumbnail: './StructvsClass.png'
+thumbnail: './image/StructvsClass.png'
 ---
 
 # Class와 Struct차이

@@ -4,7 +4,7 @@ title: '콜바이밸류 vs 콜바이레퍼런스 ref와 out 차이'
 categories: ['C샵']
 summary: 'Call by value (값에 의한 전달) : 값만 보내니, 보잰 값을 아무리 바꿔도 원본 값은 안 바뀐다.
 Call by reference (참조에 의한 전달) : 원본 값의 주소를 보내니, 값을 바꾸면 원본도 바뀐다.'
-thumbnail: './callbyvaluevscallbyrefrence.png'
+thumbnail: './image/callbyvaluevscallbyrefrence.png'
 ---
 
 # 콜바이밸류 vs 콜바이레퍼런스 ref와 out 차이

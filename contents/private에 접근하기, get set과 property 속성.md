@@ -3,7 +3,7 @@ date: '2023-10-27'
 title: 'private에 접근하기, get set과 property 속성'
 categories: ['C샵']
 summary: '메모리를 보유한 객체를 이용해서 맴버에 점(.)을 찍고 접근할 수 있는지 없는지의 제어를 말한다.'
-thumbnail: './Property.png'
+thumbnail: './image/Property.png'
 ---
 
 # private에 접근하기 : get set과 property 속성

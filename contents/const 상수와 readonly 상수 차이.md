@@ -4,7 +4,7 @@ title: 'const 상수와 readonly 상수 차이'
 categories: ['C샵']
 summary: '상수 : 변수와는 달리 변경이 불가능하다. (예) 10 = 100;
 const 키워드 : 상수를 선언하는 키워드이다.'
-thumbnail: './constVSreadonly.png'
+thumbnail: './image/constVSreadonly.png'
 ---
 
 # const상수와 readonly 상수 차이
