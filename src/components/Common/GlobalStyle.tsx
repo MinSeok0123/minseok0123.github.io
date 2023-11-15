@@ -51,6 +51,8 @@ const defaultStyle = css`
     --prism-bg: #fbfcfd;
     --prism-default-text: #24292e;
     background-color: var(--bg);
+
+    --primary2: #20C997;
   }
 
   body.dark {
@@ -83,6 +85,8 @@ const defaultStyle = css`
     --prism-bg: #1e1e1e;
     --prism-default-text: #e0e6f1;
     color: var(--textNormal);
+
+    --primary2: #63E6BE;
   }
 `
 

@@ -288,16 +288,37 @@ const PrevNextWrap = styled.div`
   width: 768px;
   margin-left: auto;
   margin-right: auto;
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
 `
 
 const PrevGrid = styled.div`
   min-width: 0px;
   flex: 1 1 0%;
+
+  @media (max-width: 768px) {
+    margin-left: 0px;
+    margin-bottom: 1.5rem;
+    flex: initial;
+    width: 100%;
+  }
 `
 const NextGrid = styled.div`
   min-width: 0px;
   flex: 1 1 0%;
   margin-left: 3rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0px;
+    margin-bottom: 1.5rem;
+    flex: initial;
+    width: 100%;
+  }
 `
 
 const Prev = styled.a`
@@ -327,6 +348,68 @@ const Next = styled.a`
   align-items: center;
   text-decoration: none;
   flex-direction: row-reverse;
+`
+
+const LeftDiv = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  border: 1px solid var(--primary2);
+  font-size: 1.5rem;
+  color: var(--primary2);
+  margin-left: 1rem;
+`
+const RightDiv = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  border: 1px solid var(--primary2);
+  font-size: 1.5rem;
+  color: var(--primary2);
+  margin-right: 1rem;
+`
+
+const LeftContentWrap = styled.div`
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
+  min-width: 0px;
+`
+const RightContentWrap = styled.div`
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+  min-width: 0px;
+`
+
+const LeftDes = styled.div`
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--text2);
+  line-height: 2;
+  display: block;
+`
+
+const RightDes = styled.div`
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--text2);
+  display: block;
+  line-height: 2;
 `
 
 type TocProps = {
@@ -401,6 +484,10 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
       })
   }, [location])
 
+  const truncateText = (text: string | any[], maxLength: number) => {
+    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text
+  }
+
   return (
     <>
       <Toc headings={headings} />
@@ -409,19 +496,51 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
         dangerouslySetInnerHTML={{ __html: html }}
       />
       <PrevNextWrap>
+        {!pageLinks.previousPage && <PrevGrid></PrevGrid>}
+        {!pageLinks.nextPage && <NextGrid></NextGrid>}
         {pageLinks.previousPage && (
           <PrevGrid>
             <Prev href={`/${pageLinks.previousPage}`}>
-              <span>이전글</span>
-              <span>{pageLinks.previousPage}</span>
+              <RightDiv>
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 24 24"
+                  height="1em"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                </svg>
+              </RightDiv>
+              <RightContentWrap>
+                <RightDes>이전 포스트</RightDes>
+                <h3>{truncateText(pageLinks.previousPage, 28)}</h3>
+              </RightContentWrap>
             </Prev>
           </PrevGrid>
         )}
         {pageLinks.nextPage && (
           <NextGrid>
             <Next href={`/${pageLinks.nextPage}`}>
-              <span>다음글</span>
-              <span>{pageLinks.nextPage}</span>
+              <LeftDiv>
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 24 24"
+                  height="1em"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                </svg>
+              </LeftDiv>
+              <LeftContentWrap>
+                <LeftDes>다음 포스트</LeftDes>
+                <h3>{truncateText(pageLinks.nextPage, 28)}</h3>
+              </LeftContentWrap>
             </Next>
           </NextGrid>
         )}
