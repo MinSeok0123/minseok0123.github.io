@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import copy from 'copy-to-clipboard'
 import { toast, ToastContainer, Flip } from 'react-toastify'
+import { Link } from 'gatsby'
 
 type PostContentProps = {
   html: string
@@ -280,14 +281,70 @@ const ShareIcon = styled.svg`
   height: 24px;
 `
 
+const PrevNextWrap = styled.div`
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  display: flex;
+  width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+`
+
+const PrevGrid = styled.div`
+  min-width: 0px;
+  flex: 1 1 0%;
+`
+const NextGrid = styled.div`
+  min-width: 0px;
+  flex: 1 1 0%;
+  margin-left: 3rem;
+`
+
+const Prev = styled.a`
+  cursor: pointer;
+  background: var(--bg-element2);
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 4px 0px;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 4rem;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  text-decoration: none;
+`
+
+const Next = styled.a`
+  cursor: pointer;
+  background: var(--bg-element2);
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 4px 0px;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 4rem;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  text-decoration: none;
+  flex-direction: row-reverse;
+`
+
 type TocProps = {
   headings: Array<{ id: string; text: string; level: number }>
 }
 
 const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
-  const [headings, setHeadings] = React.useState<
+  const [headings, setHeadings] = useState<
     Array<{ id: string; text: string; level: number }>
   >([])
+
+  const [pageLinks, setPageLinks] = useState<{
+    previousPage: string | null
+    nextPage: string | null
+  }>({
+    previousPage: null,
+    nextPage: null,
+  })
 
   useEffect(() => {
     const headingElements = document.querySelectorAll(
@@ -302,11 +359,13 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
   }, [])
 
   useEffect(() => {
-    const pathname = window.location.pathname
+    const pathname = location.pathname
     const decodedValue = decodeURIComponent(pathname.replace(/^\/+|\/+$/g, ''))
+
     fetch(
-      `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/view_count/` +
-        encodeURIComponent(decodedValue),
+      `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/view_count/${encodeURIComponent(
+        decodedValue,
+      )}`,
       {
         method: 'POST',
       },
@@ -321,7 +380,26 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
       .catch(error => {
         console.log('조회수를 업데이트하는 중에 오류가 발생했습니다.:', error)
       })
-  }, [])
+
+    fetch(
+      `http://localhost:8080/api/get_page/${encodeURIComponent(decodedValue)}`,
+      {
+        method: 'POST',
+      },
+    )
+      .then(response => response.json())
+      .then(data => {
+        console.log('Data from localhost:8080/api/get_page/pathname:', data)
+
+        setPageLinks({
+          previousPage: data.previousPage,
+          nextPage: data.nextPage,
+        })
+      })
+      .catch(error => {
+        console.log('페이지를 가져오는데 오류가 발생했습니다.:', error)
+      })
+  }, [location])
 
   return (
     <>
@@ -330,6 +408,24 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
         className="markdown-body"
         dangerouslySetInnerHTML={{ __html: html }}
       />
+      <PrevNextWrap>
+        {pageLinks.previousPage && (
+          <PrevGrid>
+            <Prev href={`/${pageLinks.previousPage}`}>
+              <span>이전글</span>
+              <span>{pageLinks.previousPage}</span>
+            </Prev>
+          </PrevGrid>
+        )}
+        {pageLinks.nextPage && (
+          <NextGrid>
+            <Next href={`/${pageLinks.nextPage}`}>
+              <span>다음글</span>
+              <span>{pageLinks.nextPage}</span>
+            </Next>
+          </NextGrid>
+        )}
+      </PrevNextWrap>
     </>
   )
 }
