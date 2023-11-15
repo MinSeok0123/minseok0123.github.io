@@ -465,7 +465,9 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
       })
 
     fetch(
-      `http://localhost:8080/api/get_page/${encodeURIComponent(decodedValue)}`,
+      `https://port-0-minlog-be-dihik2mliwbygs1.sel4.cloudtype.app/api/get_page/${encodeURIComponent(
+        decodedValue,
+      )}`,
       {
         method: 'POST',
       },
