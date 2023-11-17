@@ -484,7 +484,7 @@ const PostContent: FunctionComponent<PostContentProps> = function ({ html }) {
       .catch(error => {
         console.log('페이지를 가져오는데 오류가 발생했습니다.:', error)
       })
-  }, [location])
+  }, [])
 
   const truncateText = (text: string | any[], maxLength: number) => {
     return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text
