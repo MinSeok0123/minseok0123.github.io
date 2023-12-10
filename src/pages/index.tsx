@@ -10,6 +10,7 @@ import { IGatsbyImageData } from 'gatsby-plugin-image'
 import ToggleNav from 'components/Main/ToggleNav'
 import { useRecoilState } from 'recoil'
 import { selectedCategoryState, categoryListState } from '../recoil/recoil'
+import Modal from 'components/Modal/MainModal'
 
 type IndexPageProps = {
   location: {
@@ -89,6 +90,12 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
   // console.log(categoryList)
   // console.log(selectedCategory)
 
+  const [isModalOpen, setModalOpen] = useState(true)
+
+  const closeModal = () => {
+    setModalOpen(false)
+  }
+
   return (
     <Template
       title={title}
@@ -96,6 +103,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       url={siteUrl}
       image={publicURL}
     >
+      <Modal isOpen={isModalOpen} onClose={closeModal} />
       <Introduction profileImage={gatsbyImageData} />
       {/* <CategoryList
         categoryList={categoryList}
