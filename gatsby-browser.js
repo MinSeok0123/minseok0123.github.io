@@ -14,3 +14,11 @@ export const wrapRootElement = ({ element }) => {
     </>
   )
 }
+
+export const onClientEntry = () => {
+  const style = document.createElement('link')
+  style.type = 'text/css'
+  style.rel = 'stylesheet'
+  style.href = 'https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap'
+  document.head.appendChild(style)
+}

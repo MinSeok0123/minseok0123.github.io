@@ -8,7 +8,6 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode'
 import { useRecoilState } from 'recoil'
 import { themeState } from '../../recoil/recoil'
 
-
 // type IntroductionProps = {
 //   profileImage: IGatsbyImageData
 // }
@@ -43,7 +42,6 @@ const Header = styled.div`
 `
 
 const Logo = styled.a`
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap');
   font-family: 'Fira Mono', monospace;
   font-weight: 450;
   font-size: 1.5rem;
@@ -124,7 +122,7 @@ const Introduction: FunctionComponent<IntroductionProps> = function ({}) {
   const notify = () => toast('준비중입니다.')
   const [theme, toggleTheme] = useTheme()
 
-  const [isDarkMode, setDarkMode] = React.useState(true)
+  const [isDarkMode, setDarkMode] = React.useState(theme === 'dark')
 
   const toggleDarkMode = (checked: boolean) => {
     setDarkMode(checked)
@@ -150,7 +148,7 @@ const Introduction: FunctionComponent<IntroductionProps> = function ({}) {
             tabIndex={0}
           >
             <DarkModeSwitch
-              checked={theme === 'dark'}
+              checked={isDarkMode}
               onChange={toggleDarkMode}
               size={25}
             />
