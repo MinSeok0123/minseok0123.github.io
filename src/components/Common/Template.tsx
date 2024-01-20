@@ -10,6 +10,8 @@ type TemplateProps = {
   url: string
   image: string
   children: ReactNode
+  lang: string 
+  structuredData: object
 }
 
 export const Container = styled.main`
@@ -24,6 +26,8 @@ const Template: FunctionComponent<TemplateProps> = function ({
   url,
   image,
   children,
+  lang,
+  structuredData
 }) {
   return (
     <Container>
@@ -57,7 +61,11 @@ const Template: FunctionComponent<TemplateProps> = function ({
           content="7df43528663d4b9cd62e972a7d16bdf99ae2622a"
         />
 
-        <html lang="ko" />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+
+        <html lang={lang} />
       </Helmet>
 
       <GlobalStyle />
