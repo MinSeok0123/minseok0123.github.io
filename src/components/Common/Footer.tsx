@@ -20,10 +20,12 @@ const Acolor = styled.a`
 `
 
 const Footer: FunctionComponent = function () {
+  const currentYear = new Date().getFullYear()
+
   return (
     <FooterWrapper>
       <span>
-        © 2023&nbsp;
+        © {currentYear}&nbsp;
         <Acolor href="https://github.com/MinSeok0123">Minseok</Acolor>
         &nbsp;powered by&nbsp;
         <Acolor href="https://github.com/MinSeok0123/minseok0123.github.io">
