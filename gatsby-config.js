@@ -14,6 +14,14 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: 'https://minseok0123.github.io/',
+        sitemap: 'https://minseok0123.github.io/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-typescript',
       options: {
         isTSX: true,
