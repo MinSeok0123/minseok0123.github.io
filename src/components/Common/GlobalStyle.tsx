@@ -2,13 +2,22 @@ import React, { FunctionComponent } from 'react'
 import { Global, css } from '@emotion/react'
 
 const defaultStyle = css`
-  @import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2');
+  @font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2')
+      format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
 
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'NanumSquareNeo-Variable', normal;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+      'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', 나눔고딕,
+      'Nanum Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', arial, 돋움, Dotum,
+      Tahoma, Geneva, sans-serif;
   }
 
   html,
@@ -52,7 +61,7 @@ const defaultStyle = css`
     --prism-default-text: #24292e;
     background-color: var(--bg);
 
-    --primary2: #20C997;
+    --primary2: #20c997;
   }
 
   body.dark {
@@ -86,7 +95,7 @@ const defaultStyle = css`
     --prism-default-text: #e0e6f1;
     color: var(--textNormal);
 
-    --primary2: #63E6BE;
+    --primary2: #63e6be;
   }
 `
 
