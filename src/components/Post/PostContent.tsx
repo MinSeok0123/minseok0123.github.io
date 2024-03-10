@@ -127,6 +127,30 @@ const MarkdownRenderer = styled.div`
     color: var(--prism-default-text);
   }
 
+  table {
+    min-width: 40%;
+    max-width: 100%;
+    border: 1px solid var(--border2);
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  td {
+    word-break: break-word;
+    padding: 0.5rem;
+    border-left: 1px solid var(--border2);
+    word-break: break-word;
+    padding: 0.5rem;
+  }
+
+  th {
+    background: var(--bg-page1);
+    word-break: break-word;
+    padding: 0.5rem;
+    border-left: 1px solid var(--border2);
+    border-bottom: 4px solid var(--border2);
+  }
+
   // Markdown Responsive Design
   @media (max-width: 768px) {
     width: 100%;

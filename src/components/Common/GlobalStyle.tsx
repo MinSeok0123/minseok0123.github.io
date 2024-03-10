@@ -37,6 +37,7 @@ const defaultStyle = css`
     --bg: white;
     --bg-element2: #f8f9fa;
     --bg-element5: #212529;
+    --bg-page1: #F8F9FA;
     --textNormal: #222;
     --textTitle: #222;
     --textLink: blue;
@@ -70,6 +71,7 @@ const defaultStyle = css`
     --bg: #121212;
     --bg-element2: #1e1e1e;
     --bg-element5: #f1f3f5;
+    --bg-page1: #121212;
     --textNormal: white;
     --textTitle: white;
     --textLink: yellow;
